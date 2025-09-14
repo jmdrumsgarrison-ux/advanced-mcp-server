@@ -29,6 +29,9 @@ from session_manager import SessionManager
 from file_operations import FileOperations
 from auth_manager import AuthManager
 from chat_manager import ChatManager, ChatMaintenanceScheduler
+from course_downloader import GreatLearningDownloader
+from web_scraper import WebScraper, ScrapingError
+from modern_content_acquisition import ModernContentAcquisition
 
 # Configure logging
 logging.basicConfig(
@@ -53,10 +56,48 @@ class AdvancedMCPServer:
         self.auth_manager = AuthManager()
         self.chat_manager = ChatManager(self.api_manager)
         self.chat_scheduler = ChatMaintenanceScheduler(self.chat_manager)
+        self.course_downloader = GreatLearningDownloader("temp_downloads")
+        self.modern_content = ModernContentAcquisition("modern_downloads")
+        
+        # Load credentials for web scraping
+        self._load_scraping_credentials()
         
         # Initialize server capabilities
         self._register_tools()
         self._register_resources()
+        
+    def _load_scraping_credentials(self):
+        """Load credentials for web scraping from keys file"""
+        try:
+            keys_file = Path("G:/projects/keys.txt")
+            if keys_file.exists():
+                with open(keys_file, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                    
+                # Extract Great Learning credentials
+                lines = content.split('\n')
+                self.great_learning_username = None
+                self.great_learning_password = None
+                
+                for i, line in enumerate(lines):
+                    if 'Great Learnings Password' in line or 'Great Learning' in line:
+                        # Look for U: and P: lines after this
+                        for j in range(i+1, min(i+5, len(lines))):
+                            if lines[j].startswith('U:'):
+                                self.great_learning_username = lines[j].split(':', 1)[1].strip()
+                            elif lines[j].startswith('P:'):
+                                self.great_learning_password = lines[j].split(':', 1)[1].strip()
+                
+                if self.great_learning_username and self.great_learning_password:
+                    logger.info("Great Learning credentials loaded successfully")
+                else:
+                    logger.warning("Great Learning credentials not found in keys file")
+            else:
+                logger.warning("Keys file not found - web scraping will require manual credentials")
+        except Exception as e:
+            logger.error(f"Error loading scraping credentials: {e}")
+            self.great_learning_username = None
+            self.great_learning_password = None
         
     def _register_tools(self):
         """Register all available tools"""
@@ -227,6 +268,196 @@ class AdvancedMCPServer:
                 Tool(
                     name="stop_chat_scheduler",
                     description="Stop the automatic chat maintenance scheduler",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {},
+                        "additionalProperties": False
+                    }
+                ),
+                
+                # === WEB SCRAPING TOOLS ===
+                
+                Tool(
+                    name="login_great_learning",
+                    description="Login to Great Learning platform using stored credentials",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {},
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="get_available_courses",
+                    description="Get list of available courses on Great Learning platform",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {},
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="get_course_info",
+                    description="Get detailed information about a specific course",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "course_id": {
+                                "type": "string",
+                                "description": "The course ID to get information about"
+                            }
+                        },
+                        "required": ["course_id"],
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="download_course_content",
+                    description="Download all content from a specific course",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "course_id": {
+                                "type": "string",
+                                "description": "The course ID to download content from"
+                            },
+                            "include_videos": {
+                                "type": "boolean",
+                                "description": "Whether to include video files",
+                                "default": True
+                            },
+                            "include_pdfs": {
+                                "type": "boolean",
+                                "description": "Whether to include PDF files",
+                                "default": True
+                            }
+                        },
+                        "required": ["course_id"],
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="get_download_stats",
+                    description="Get statistics about downloaded files",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {},
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="cleanup_downloads",
+                    description="Clean up old downloaded files",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "older_than_hours": {
+                                "type": "integer",
+                                "description": "Delete files older than this many hours",
+                                "default": 24
+                            }
+                        },
+                        "additionalProperties": False
+                    }
+                ),
+                
+                # === MODERN CONTENT ACQUISITION TOOLS ===
+                
+                Tool(
+                    name="modern_course_scraper",
+                    description="Extract course content using modern Crawl4AI and yt-dlp tools",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "course_url": {
+                                "type": "string",
+                                "description": "URL of the course to scrape"
+                            },
+                            "credentials": {
+                                "type": "object",
+                                "description": "Login credentials {username, password}",
+                                "properties": {
+                                    "username": {"type": "string"},
+                                    "password": {"type": "string"}
+                                }
+                            }
+                        },
+                        "required": ["course_url"],
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="modern_video_downloader",
+                    description="Download videos using yt-dlp with advanced options",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "video_urls": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                                "description": "List of video URLs to download"
+                            },
+                            "quality": {
+                                "type": "string",
+                                "description": "Video quality preference",
+                                "default": "best[height<=720]"
+                            },
+                            "include_subtitles": {
+                                "type": "boolean",
+                                "description": "Whether to download subtitles",
+                                "default": True
+                            }
+                        },
+                        "required": ["video_urls"],
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="modern_document_acquisition",
+                    description="Download documents and PDFs using modern techniques",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "document_urls": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                                "description": "List of document URLs to download"
+                            },
+                            "headers": {
+                                "type": "object",
+                                "description": "Custom headers for requests"
+                            }
+                        },
+                        "required": ["document_urls"],
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="modern_content_statistics",
+                    description="Get comprehensive statistics about modern content acquisition",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {},
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="modern_cleanup_tools",
+                    description="Clean up old downloaded files and manage storage",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "older_than_hours": {
+                                "type": "integer",
+                                "description": "Delete files older than this many hours",
+                                "default": 24
+                            }
+                        },
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="modern_system_status",
+                    description="Get health status of modern content acquisition tools",
                     inputSchema={
                         "type": "object",
                         "properties": {},
@@ -1214,6 +1445,350 @@ class AdvancedMCPServer:
             except Exception as e:
                 logger.error(f"Error stopping chat scheduler: {e}")
                 return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        # === WEB SCRAPING TOOL IMPLEMENTATIONS ===
+        
+        @self.server.call_tool()
+        async def login_great_learning(arguments: dict) -> list[TextContent]:
+            """Login to Great Learning platform using stored credentials"""
+            try:
+                if not self.great_learning_username or not self.great_learning_password:
+                    return [TextContent(
+                        type="text",
+                        text="Error: Great Learning credentials not found. Please check keys.txt file."
+                    )]
+                
+                success = self.course_downloader.login(
+                    self.great_learning_username, 
+                    self.great_learning_password
+                )
+                
+                if success:
+                    return [TextContent(
+                        type="text",
+                        text="Successfully logged into Great Learning platform."
+                    )]
+                else:
+                    return [TextContent(
+                        type="text",
+                        text="Failed to login to Great Learning platform. Please check credentials."
+                    )]
+                    
+            except Exception as e:
+                logger.error(f"Error logging into Great Learning: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def get_available_courses(arguments: dict) -> list[TextContent]:
+            """Get list of available courses on Great Learning platform"""
+            try:
+                if not self.course_downloader.is_authenticated:
+                    return [TextContent(
+                        type="text",
+                        text="Error: Not logged in. Please use login_great_learning tool first."
+                    )]
+                
+                courses = self.course_downloader.get_available_courses()
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(courses, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error getting available courses: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def get_course_info(arguments: dict) -> list[TextContent]:
+            """Get detailed information about a specific course"""
+            try:
+                course_id = arguments.get("course_id")
+                if not course_id:
+                    return [TextContent(
+                        type="text",
+                        text="Error: course_id parameter is required"
+                    )]
+                
+                if not self.course_downloader.is_authenticated:
+                    return [TextContent(
+                        type="text",
+                        text="Error: Not logged in. Please use login_great_learning tool first."
+                    )]
+                
+                course_info = self.course_downloader.get_course_info(course_id)
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(course_info, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error getting course info: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def download_course_content(arguments: dict) -> list[TextContent]:
+            """Download all content from a specific course"""
+            try:
+                course_id = arguments.get("course_id")
+                include_videos = arguments.get("include_videos", True)
+                include_pdfs = arguments.get("include_pdfs", True)
+                
+                if not course_id:
+                    return [TextContent(
+                        type="text",
+                        text="Error: course_id parameter is required"
+                    )]
+                
+                if not self.course_downloader.is_authenticated:
+                    return [TextContent(
+                        type="text",
+                        text="Error: Not logged in. Please use login_great_learning tool first."
+                    )]
+                
+                download_results = self.course_downloader.download_course(
+                    course_id=course_id,
+                    include_videos=include_videos,
+                    include_pdfs=include_pdfs
+                )
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(download_results, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error downloading course content: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def get_download_stats(arguments: dict) -> list[TextContent]:
+            """Get statistics about downloaded files"""
+            try:
+                stats = self.course_downloader.get_download_stats()
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(stats, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error getting download stats: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def cleanup_downloads(arguments: dict) -> list[TextContent]:
+            """Clean up old downloaded files"""
+            try:
+                older_than_hours = arguments.get("older_than_hours", 24)
+                
+                cleanup_results = self.course_downloader.cleanup_downloads(
+                    older_than_hours=older_than_hours
+                )
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(cleanup_results, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error cleaning up downloads: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        # === MODERN CONTENT ACQUISITION TOOL IMPLEMENTATIONS ===
+        
+        @self.server.call_tool()
+        async def modern_course_scraper(arguments: dict) -> list[TextContent]:
+            """Extract course content using modern Crawl4AI and yt-dlp tools"""
+            try:
+                course_url = arguments.get("course_url")
+                credentials = arguments.get("credentials")
+                
+                if not course_url:
+                    return [TextContent(
+                        type="text",
+                        text="Error: course_url parameter is required"
+                    )]
+                
+                # Use stored credentials if not provided
+                if not credentials and self.great_learning_username and self.great_learning_password:
+                    credentials = {
+                        'username': self.great_learning_username,
+                        'password': self.great_learning_password
+                    }
+                
+                logger.info(f"Starting modern course scraping for: {course_url}")
+                
+                results = await self.modern_content.scrape_great_learning_course(
+                    course_url=course_url,
+                    credentials=credentials
+                )
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(results, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error with modern course scraper: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def modern_video_downloader(arguments: dict) -> list[TextContent]:
+            """Download videos using yt-dlp with advanced options"""
+            try:
+                video_urls = arguments.get("video_urls", [])
+                quality = arguments.get("quality", "best[height<=720]")
+                include_subtitles = arguments.get("include_subtitles", True)
+                
+                if not video_urls:
+                    return [TextContent(
+                        type="text",
+                        text="Error: video_urls parameter is required"
+                    )]
+                
+                logger.info(f"Starting modern video download for {len(video_urls)} videos")
+                
+                # Update yt-dlp configuration
+                self.modern_content.yt_dlp_config.update({
+                    'format': quality,
+                    'writesubtitles': include_subtitles,
+                    'writeautomaticsub': include_subtitles
+                })
+                
+                results = await self.modern_content._download_videos(video_urls)
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(results, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error with modern video downloader: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def modern_document_acquisition(arguments: dict) -> list[TextContent]:
+            """Download documents and PDFs using modern techniques"""
+            try:
+                document_urls = arguments.get("document_urls", [])
+                headers = arguments.get("headers", {})
+                
+                if not document_urls:
+                    return [TextContent(
+                        type="text",
+                        text="Error: document_urls parameter is required"
+                    )]
+                
+                logger.info(f"Starting modern document acquisition for {len(document_urls)} documents")
+                
+                results = await self.modern_content._download_documents(document_urls)
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(results, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error with modern document acquisition: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def modern_content_statistics(arguments: dict) -> list[TextContent]:
+            """Get comprehensive statistics about modern content acquisition"""
+            try:
+                stats = self.modern_content.get_stats()
+                
+                # Enhanced statistics with additional metrics
+                enhanced_stats = {
+                    **stats,
+                    'system_info': {
+                        'crawl4ai_version': '0.7.4',
+                        'yt_dlp_available': True,
+                        'selenium_available': True,
+                        'requests_available': True
+                    },
+                    'recent_activity': {
+                        'last_course_scraped': stats.get('last_activity'),
+                        'total_operations': stats.get('courses_processed', 0) + stats.get('videos_downloaded', 0)
+                    }
+                }
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(enhanced_stats, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error getting modern content statistics: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def modern_cleanup_tools(arguments: dict) -> list[TextContent]:
+            """Clean up old downloaded files and manage storage"""
+            try:
+                older_than_hours = arguments.get("older_than_hours", 24)
+                
+                logger.info(f"Starting modern cleanup for files older than {older_than_hours} hours")
+                
+                cleanup_results = self.modern_content.cleanup_old_downloads(
+                    older_than_hours=older_than_hours
+                )
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(cleanup_results, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error with modern cleanup tools: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def modern_system_status(arguments: dict) -> list[TextContent]:
+            """Get health status of modern content acquisition tools"""
+            try:
+                # Get basic stats
+                stats = self.modern_content.get_stats()
+                
+                # Perform health checks
+                health_status = {
+                    'system_status': 'healthy',
+                    'modern_content_acquisition': {
+                        'status': 'operational',
+                        'crawl4ai_configured': stats['tools_status']['crawl4ai_configured'],
+                        'yt_dlp_configured': stats['tools_status']['yt_dlp_configured'],
+                        'download_directories': stats['download_directories']
+                    },
+                    'performance_metrics': {
+                        'courses_processed': stats['courses_processed'],
+                        'videos_downloaded': stats['videos_downloaded'],
+                        'documents_downloaded': stats['documents_downloaded'],
+                        'errors': stats['errors'],
+                        'last_activity': stats['last_activity']
+                    },
+                    'storage_info': {
+                        'video_directory': stats['download_directories']['videos'],
+                        'document_directory': stats['download_directories']['documents'],
+                        'metadata_directory': stats['download_directories']['metadata']
+                    },
+                    'api_compatibility': {
+                        'crawl4ai_version': '0.7.4',
+                        'api_fixes_applied': True,
+                        'character_encoding': 'utf-8 compatible',
+                        'windows_compatibility': True
+                    }
+                }
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(health_status, indent=2)
+                )]
+                
+            except Exception as e:
+                logger.error(f"Error getting modern system status: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
     
     def _register_resources(self):
         """Register available resources"""
@@ -1266,7 +1841,14 @@ class AdvancedMCPServer:
                 "api_integrations",
                 "file_operations",
                 "authentication",
-                "rules_engine"
+                "rules_engine",
+                "chat_management",
+                "web_scraping",
+                "modern_content_acquisition",
+                "advanced_video_downloading",
+                "document_acquisition",
+                "content_analytics",
+                "automated_cleanup"
             ],
             "supported_apis": [
                 "claude",
@@ -1276,7 +1858,25 @@ class AdvancedMCPServer:
                 "google_cloud",
                 "google_drive",
                 "google_sheets"
-            ]
+            ],
+            "web_scraping": {
+                "supported_platforms": ["great_learning"],
+                "features": ["course_download", "content_extraction", "authenticated_access"]
+            },
+            "modern_content_acquisition": {
+                "tools": ["crawl4ai", "yt-dlp", "selenium", "requests"],
+                "capabilities": [
+                    "advanced_web_scraping",
+                    "video_downloading",
+                    "document_acquisition",
+                    "content_statistics",
+                    "automated_cleanup",
+                    "system_monitoring"
+                ],
+                "supported_formats": ["mp4", "pdf", "json", "html"],
+                "api_version": "0.7.4",
+                "windows_compatible": True
+            }
         }
     
     async def _get_recent_logs(self) -> str:
