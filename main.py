@@ -28,6 +28,7 @@ from rules_engine import RulesEngine
 from session_manager import SessionManager
 from file_operations import FileOperations
 from auth_manager import AuthManager
+from chat_manager import ChatManager, ChatMaintenanceScheduler
 
 # Configure logging
 logging.basicConfig(
@@ -50,6 +51,8 @@ class AdvancedMCPServer:
         self.session_manager = SessionManager()
         self.file_ops = FileOperations()
         self.auth_manager = AuthManager()
+        self.chat_manager = ChatManager(self.api_manager)
+        self.chat_scheduler = ChatMaintenanceScheduler(self.chat_manager)
         
         # Initialize server capabilities
         self._register_tools()
@@ -136,6 +139,94 @@ class AdvancedMCPServer:
                 Tool(
                     name="get_server_status",
                     description="Get comprehensive server status and health",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {},
+                        "additionalProperties": False
+                    }
+                ),
+                
+                # === CHAT MANAGEMENT TOOLS ===
+                
+                Tool(
+                    name="download_and_save_chats",
+                    description="Download current chats from Claude and save locally",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "limit": {
+                                "type": "integer",
+                                "description": "Maximum number of chats to download",
+                                "default": 100
+                            },
+                            "older_than_hours": {
+                                "type": "integer",
+                                "description": "Only download chats older than specified hours"
+                            }
+                        },
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="cleanup_old_chats",
+                    description="Delete chats from Claude that are older than specified days",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "days_old": {
+                                "type": "integer",
+                                "description": "Delete chats older than this many days",
+                                "default": 1
+                            }
+                        },
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="full_chat_maintenance",
+                    description="Complete maintenance cycle: download current chats then delete old ones",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {},
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="get_chat_statistics",
+                    description="Get statistics about saved chats and maintenance history",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {},
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="list_saved_chats",
+                    description="List recently saved chat files",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {
+                            "limit": {
+                                "type": "integer",
+                                "description": "Maximum number of chat files to list",
+                                "default": 20
+                            }
+                        },
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="start_chat_scheduler",
+                    description="Start the automatic 24-hour chat maintenance scheduler",
+                    inputSchema={
+                        "type": "object",
+                        "properties": {},
+                        "additionalProperties": False
+                    }
+                ),
+                Tool(
+                    name="stop_chat_scheduler",
+                    description="Stop the automatic chat maintenance scheduler",
                     inputSchema={
                         "type": "object",
                         "properties": {},
@@ -1012,6 +1103,116 @@ class AdvancedMCPServer:
                 )]
             except Exception as e:
                 logger.error(f"Error getting server status: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        # === CHAT MANAGEMENT TOOLS ===
+        
+        @self.server.call_tool()
+        async def download_and_save_chats(arguments: dict) -> list[TextContent]:
+            """Download current chats from Claude and save locally"""
+            try:
+                limit = arguments.get("limit")
+                older_than_hours = arguments.get("older_than_hours")
+                
+                result = await self.chat_manager.download_and_save_chats(
+                    limit=limit,
+                    older_than_hours=older_than_hours
+                )
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(result, indent=2)
+                )]
+            except Exception as e:
+                logger.error(f"Error downloading and saving chats: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def cleanup_old_chats(arguments: dict) -> list[TextContent]:
+            """Delete chats from Claude that are older than specified days"""
+            try:
+                days_old = arguments.get("days_old", 1)
+                
+                result = await self.chat_manager.cleanup_old_chats(days_old=days_old)
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(result, indent=2)
+                )]
+            except Exception as e:
+                logger.error(f"Error cleaning up old chats: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def full_chat_maintenance(arguments: dict) -> list[TextContent]:
+            """Complete maintenance cycle: download current chats then delete old ones"""
+            try:
+                result = await self.chat_manager.full_maintenance_cycle()
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(result, indent=2)
+                )]
+            except Exception as e:
+                logger.error(f"Error with full chat maintenance: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def get_chat_statistics(arguments: dict) -> list[TextContent]:
+            """Get statistics about saved chats and maintenance history"""
+            try:
+                result = await self.chat_manager.get_chat_statistics()
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(result, indent=2)
+                )]
+            except Exception as e:
+                logger.error(f"Error getting chat statistics: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def list_saved_chats(arguments: dict) -> list[TextContent]:
+            """List recently saved chat files"""
+            try:
+                limit = arguments.get("limit", 20)
+                
+                result = await self.chat_manager.list_saved_chats(limit=limit)
+                
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(result, indent=2)
+                )]
+            except Exception as e:
+                logger.error(f"Error listing saved chats: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def start_chat_scheduler(arguments: dict) -> list[TextContent]:
+            """Start the automatic 24-hour chat maintenance scheduler"""
+            try:
+                await self.chat_scheduler.start_scheduler()
+                
+                return [TextContent(
+                    type="text",
+                    text="Chat maintenance scheduler started successfully. Will run every 24 hours."
+                )]
+            except Exception as e:
+                logger.error(f"Error starting chat scheduler: {e}")
+                return [TextContent(type="text", text=f"Error: {str(e)}")]
+        
+        @self.server.call_tool()
+        async def stop_chat_scheduler(arguments: dict) -> list[TextContent]:
+            """Stop the automatic chat maintenance scheduler"""
+            try:
+                await self.chat_scheduler.stop_scheduler()
+                
+                return [TextContent(
+                    type="text",
+                    text="Chat maintenance scheduler stopped successfully."
+                )]
+            except Exception as e:
+                logger.error(f"Error stopping chat scheduler: {e}")
                 return [TextContent(type="text", text=f"Error: {str(e)}")]
     
     def _register_resources(self):
