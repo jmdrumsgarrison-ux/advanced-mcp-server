@@ -1,0 +1,102 @@
+# Environment variables and sensitive data
+.env
+*.env
+.env.local
+.env.production
+
+# API keys and credentials
+config.json
+google-service-account-credentials.json
+token.json
+*.key
+*.pem
+*credentials*
+*secrets*
+
+# Logs
+*.log
+logs/
+*.txt
+advanced_mcp.log
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Temporary files and results
+*_result.txt
+*result.txt
+temp/
+*.tmp
+*.temp
+git_*_result.txt
+
+# Backup files
+backups/
+*.backup
+*.bak
+
+# Session data
+sessions/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Git workflow batch files (temporary)
+git_workflow_*.bat
+
+# Test output files
+*test_result*
+*_output.txt
+*_ascii_output.txt
+inspection_*.json
+inspection_*.txt
+
+# Batch files that are temporary
+run_*.bat
+install_*.bat
+*_test.bat
+health_check*.bat
+*debug*.bat
+simple_*.bat
+investigate_*.bat
+discover_*.bat
+find_*.bat
+validate_*.bat
+test_*.bat
+temp_*.bat

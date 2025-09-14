@@ -1,0 +1,2898 @@
+{
+  "timestamp": "2025-09-13T01:00:16.939560",
+  "total_methods": 117,
+  "categories": {
+    "Repository Management": [
+      {
+        "name": "create_repo",
+        "signature": "(repo_id: 'str', *, token: 'Union[str, bool, None]' = None, private: 'Optional[bool]' = None, repo_type: 'Optional[str]' = None, exist_ok: 'bool' = False, resource_group_id: 'Optional[str]' = None, space_sdk: 'Optional[str]' = None, space_hardware: 'Optional[SpaceHardware]' = None, space_storage: 'Optional[SpaceStorage]' = None, space_sleep_time: 'Optional[int]' = None, space_secrets: 'Optional[List[Dict[str, str]]]' = None, space_variables: 'Optional[List[Dict[str, str]]]' = None) -> 'RepoUrl'",
+        "doc": "Create an empty repo on the HuggingFace Hub.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    token (Union[bool, str, None], op...",
+        "parameters": [
+          "repo_id",
+          "token",
+          "private",
+          "repo_type",
+          "exist_ok",
+          "resource_group_id",
+          "space_sdk",
+          "space_hardware",
+          "space_storage",
+          "space_sleep_time",
+          "space_secrets",
+          "space_variables"
+        ]
+      },
+      {
+        "name": "delete_repo",
+        "signature": "(repo_id: 'str', *, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, missing_ok: 'bool' = False) -> 'None'",
+        "doc": "Delete a repo from the HuggingFace Hub. CAUTION: this is irreversible.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    token (...",
+        "parameters": [
+          "repo_id",
+          "token",
+          "repo_type",
+          "missing_ok"
+        ]
+      },
+      {
+        "name": "get_full_repo_name",
+        "signature": "(model_id: 'str', *, organization: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None)",
+        "doc": "Returns the repository name for a given model ID and optional\norganization.\n\nArgs:\n    model_id (`str`):\n        The name of the model.\n    organization (`str`, *optional*):\n        If passed, the rep...",
+        "parameters": [
+          "model_id",
+          "organization",
+          "token"
+        ]
+      },
+      {
+        "name": "get_repo_discussions",
+        "signature": "(repo_id: 'str', *, author: 'Optional[str]' = None, discussion_type: 'Optional[constants.DiscussionTypeFilter]' = None, discussion_status: 'Optional[constants.DiscussionStatusFilter]' = None, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterator[Discussion]'",
+        "doc": "Fetches Discussions and Pull Requests for the given repo.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    author (`str`, *opti...",
+        "parameters": [
+          "repo_id",
+          "author",
+          "discussion_type",
+          "discussion_status",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "list_liked_repos",
+        "signature": "(user: 'Optional[str]' = None, *, token: 'Union[bool, str, None]' = None) -> 'UserLikes'",
+        "doc": "List all public repos liked by a user on huggingface.co.\n\nThis list is public so token is optional. If `user` is not passed, it defaults to\nthe logged in user.\n\nSee also [`unlike`].\n\nArgs:\n    user (`...",
+        "parameters": [
+          "user",
+          "token"
+        ]
+      },
+      {
+        "name": "list_repo_commits",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None, revision: 'Optional[str]' = None, formatted: 'bool' = False) -> 'List[GitCommitInfo]'",
+        "doc": "Get the list of commits of a given revision for a repo on the Hub.\n\nCommits are sorted by date (last commit first).\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo...",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "token",
+          "revision",
+          "formatted"
+        ]
+      },
+      {
+        "name": "list_repo_files",
+        "signature": "(repo_id: 'str', *, revision: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'List[str]'",
+        "doc": "Get the list of files in a given repo.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated by a `/`.\n    revision (`str`, *optional*):\n        The revis...",
+        "parameters": [
+          "repo_id",
+          "revision",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "list_repo_likers",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[User]'",
+        "doc": "List all users who liked a given repo on the hugging Face Hub.\n\nSee also [`list_liked_repos`].\n\nArgs:\n    repo_id (`str`):\n        The repository to retrieve . Example: `\"user/my-cool-model\"`.\n\n    to...",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "list_repo_refs",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, include_pull_requests: 'bool' = False, token: 'Union[str, bool, None]' = None) -> 'GitRefs'",
+        "doc": "Get the list of refs of a given repo (both tags and branches).\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    repo_type (`str...",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "include_pull_requests",
+          "token"
+        ]
+      },
+      {
+        "name": "list_repo_tree",
+        "signature": "(repo_id: 'str', path_in_repo: 'Optional[str]' = None, *, recursive: 'bool' = False, expand: 'bool' = False, revision: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'Iterable[Union[RepoFile, RepoFolder]]'",
+        "doc": "List a repo tree's files and folders and get information about them.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated by a `/`.\n    path_in_repo (`st...",
+        "parameters": [
+          "repo_id",
+          "path_in_repo",
+          "recursive",
+          "expand",
+          "revision",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "move_repo",
+        "signature": "(from_id: 'str', to_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None)",
+        "doc": "Moving a repository from namespace1/repo_name1 to namespace2/repo_name2\n\nNote there are certain limitations. For more information about moving\nrepositories, please see\nhttps://hf.co/docs/hub/repositor...",
+        "parameters": [
+          "from_id",
+          "to_id",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "repo_exists",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'bool'",
+        "doc": "Checks if a repository exists on the Hugging Face Hub.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    repo_type (`str`, *opti...",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "repo_info",
+        "signature": "(repo_id: 'str', *, revision: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, timeout: 'Optional[float]' = None, files_metadata: 'bool' = False, expand: 'Optional[Union[ExpandModelProperty_T, ExpandDatasetProperty_T, ExpandSpaceProperty_T]]' = None, token: 'Union[bool, str, None]' = None) -> 'Union[ModelInfo, DatasetInfo, SpaceInfo]'",
+        "doc": "Get the info object for a given repo of a given type.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    revision (`str`, *option...",
+        "parameters": [
+          "repo_id",
+          "revision",
+          "repo_type",
+          "timeout",
+          "files_metadata",
+          "expand",
+          "token"
+        ]
+      },
+      {
+        "name": "update_repo_settings",
+        "signature": "(repo_id: 'str', *, gated: \"Optional[Literal['auto', 'manual', False]]\" = None, private: 'Optional[bool]' = None, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, xet_enabled: 'Optional[bool]' = None) -> 'None'",
+        "doc": "Update the settings of a repository, including gated access and visibility.\n\nTo give more control over how repos are used, the Hub allows repo authors to enable\naccess requests for their repos, and al...",
+        "parameters": [
+          "repo_id",
+          "gated",
+          "private",
+          "token",
+          "repo_type",
+          "xet_enabled"
+        ]
+      },
+      {
+        "name": "update_repo_visibility",
+        "signature": "(repo_id: 'str', private: 'bool' = False, *, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None) -> 'Dict[str, bool]'",
+        "doc": "Update the visibility setting of a repository.\n\nDeprecated. Use `update_repo_settings` instead.\n\nArgs:\n    repo_id (`str`, *optional*):\n        A namespace (user or an organization) and a repo name se...",
+        "parameters": [
+          "repo_id",
+          "private",
+          "token",
+          "repo_type"
+        ]
+      }
+    ],
+    "Model Operations": [
+      {
+        "name": "get_model_tags",
+        "signature": "() -> 'Dict'",
+        "doc": "List all valid model tags as a nested namespace object",
+        "parameters": []
+      },
+      {
+        "name": "list_models",
+        "signature": "(*, filter: 'Union[str, Iterable[str], None]' = None, author: 'Optional[str]' = None, gated: 'Optional[bool]' = None, inference: \"Optional[Literal['warm']]\" = None, inference_provider: \"Optional[Union[Literal['all'], 'PROVIDER_T', List['PROVIDER_T']]]\" = None, library: 'Optional[Union[str, List[str]]]' = None, language: 'Optional[Union[str, List[str]]]' = None, model_name: 'Optional[str]' = None, task: 'Optional[Union[str, List[str]]]' = None, trained_dataset: 'Optional[Union[str, List[str]]]' = None, tags: 'Optional[Union[str, List[str]]]' = None, search: 'Optional[str]' = None, pipeline_tag: 'Optional[str]' = None, emissions_thresholds: 'Optional[Tuple[float, float]]' = None, sort: \"Union[Literal['last_modified'], str, None]\" = None, direction: 'Optional[Literal[-1]]' = None, limit: 'Optional[int]' = None, expand: 'Optional[List[ExpandModelProperty_T]]' = None, full: 'Optional[bool]' = None, cardData: 'bool' = False, fetch_config: 'bool' = False, token: 'Union[bool, str, None]' = None) -> 'Iterable[ModelInfo]'",
+        "doc": "List models hosted on the Huggingface Hub, given some filters.\n\nArgs:\n    filter (`str` or `Iterable[str]`, *optional*):\n        A string or list of string to filter models on the Hub.\n    author (`st...",
+        "parameters": [
+          "filter",
+          "author",
+          "gated",
+          "inference",
+          "inference_provider",
+          "library",
+          "language",
+          "model_name",
+          "task",
+          "trained_dataset",
+          "tags",
+          "search",
+          "pipeline_tag",
+          "emissions_thresholds",
+          "sort",
+          "direction",
+          "limit",
+          "expand",
+          "full",
+          "cardData",
+          "fetch_config",
+          "token"
+        ]
+      },
+      {
+        "name": "model_info",
+        "signature": "(repo_id: 'str', *, revision: 'Optional[str]' = None, timeout: 'Optional[float]' = None, securityStatus: 'Optional[bool]' = None, files_metadata: 'bool' = False, expand: 'Optional[List[ExpandModelProperty_T]]' = None, token: 'Union[bool, str, None]' = None) -> 'ModelInfo'",
+        "doc": "Get info on one specific model on huggingface.co\n\nModel can be private if you pass an acceptable token or are logged in.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a...",
+        "parameters": [
+          "repo_id",
+          "revision",
+          "timeout",
+          "securityStatus",
+          "files_metadata",
+          "expand",
+          "token"
+        ]
+      }
+    ],
+    "Dataset Operations": [
+      {
+        "name": "dataset_info",
+        "signature": "(repo_id: 'str', *, revision: 'Optional[str]' = None, timeout: 'Optional[float]' = None, files_metadata: 'bool' = False, expand: 'Optional[List[ExpandDatasetProperty_T]]' = None, token: 'Union[bool, str, None]' = None) -> 'DatasetInfo'",
+        "doc": "Get info on one specific dataset on huggingface.co.\n\nDataset can be private if you pass an acceptable token.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name s...",
+        "parameters": [
+          "repo_id",
+          "revision",
+          "timeout",
+          "files_metadata",
+          "expand",
+          "token"
+        ]
+      },
+      {
+        "name": "get_dataset_tags",
+        "signature": "() -> 'Dict'",
+        "doc": "List all valid dataset tags as a nested namespace object.",
+        "parameters": []
+      },
+      {
+        "name": "list_datasets",
+        "signature": "(*, filter: 'Union[str, Iterable[str], None]' = None, author: 'Optional[str]' = None, benchmark: 'Optional[Union[str, List[str]]]' = None, dataset_name: 'Optional[str]' = None, gated: 'Optional[bool]' = None, language_creators: 'Optional[Union[str, List[str]]]' = None, language: 'Optional[Union[str, List[str]]]' = None, multilinguality: 'Optional[Union[str, List[str]]]' = None, size_categories: 'Optional[Union[str, List[str]]]' = None, tags: 'Optional[Union[str, List[str]]]' = None, task_categories: 'Optional[Union[str, List[str]]]' = None, task_ids: 'Optional[Union[str, List[str]]]' = None, search: 'Optional[str]' = None, sort: \"Optional[Union[Literal['last_modified'], str]]\" = None, direction: 'Optional[Literal[-1]]' = None, limit: 'Optional[int]' = None, expand: 'Optional[List[ExpandDatasetProperty_T]]' = None, full: 'Optional[bool]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[DatasetInfo]'",
+        "doc": "List datasets hosted on the Huggingface Hub, given some filters.\n\nArgs:\n    filter (`str` or `Iterable[str]`, *optional*):\n        A string or list of string to filter datasets on the hub.\n    author ...",
+        "parameters": [
+          "filter",
+          "author",
+          "benchmark",
+          "dataset_name",
+          "gated",
+          "language_creators",
+          "language",
+          "multilinguality",
+          "size_categories",
+          "tags",
+          "task_categories",
+          "task_ids",
+          "search",
+          "sort",
+          "direction",
+          "limit",
+          "expand",
+          "full",
+          "token"
+        ]
+      }
+    ],
+    "Space Operations": [
+      {
+        "name": "add_space_secret",
+        "signature": "(repo_id: 'str', key: 'str', value: 'str', *, description: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Adds or updates a secret in a Space.\n\nSecrets allow to set secret keys or tokens to a Space without hardcoding them.\nFor more details, see https://huggingface.co/docs/hub/spaces-overview#managing-secr...",
+        "parameters": [
+          "repo_id",
+          "key",
+          "value",
+          "description",
+          "token"
+        ]
+      },
+      {
+        "name": "add_space_variable",
+        "signature": "(repo_id: 'str', key: 'str', value: 'str', *, description: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Dict[str, SpaceVariable]'",
+        "doc": "Adds or updates a variable in a Space.\n\nVariables allow to set environment variables to a Space without hardcoding them.\nFor more details, see https://huggingface.co/docs/hub/spaces-overview#managing-...",
+        "parameters": [
+          "repo_id",
+          "key",
+          "value",
+          "description",
+          "token"
+        ]
+      },
+      {
+        "name": "delete_space_secret",
+        "signature": "(repo_id: 'str', key: 'str', *, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Deletes a secret from a Space.\n\nSecrets allow to set secret keys or tokens to a Space without hardcoding them.\nFor more details, see https://huggingface.co/docs/hub/spaces-overview#managing-secrets.\n\n...",
+        "parameters": [
+          "repo_id",
+          "key",
+          "token"
+        ]
+      },
+      {
+        "name": "delete_space_storage",
+        "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'SpaceRuntime'",
+        "doc": "Delete persistent storage for a Space.\n\nArgs:\n    repo_id (`str`):\n        ID of the Space to update. Example: `\"open-llm-leaderboard/open_llm_leaderboard\"`.\n    token (Union[bool, str, None], optiona...",
+        "parameters": [
+          "repo_id",
+          "token"
+        ]
+      },
+      {
+        "name": "delete_space_variable",
+        "signature": "(repo_id: 'str', key: 'str', *, token: 'Union[bool, str, None]' = None) -> 'Dict[str, SpaceVariable]'",
+        "doc": "Deletes a variable from a Space.\n\nVariables allow to set environment variables to a Space without hardcoding them.\nFor more details, see https://huggingface.co/docs/hub/spaces-overview#managing-secret...",
+        "parameters": [
+          "repo_id",
+          "key",
+          "token"
+        ]
+      },
+      {
+        "name": "duplicate_space",
+        "signature": "(from_id: 'str', to_id: 'Optional[str]' = None, *, private: 'Optional[bool]' = None, token: 'Union[bool, str, None]' = None, exist_ok: 'bool' = False, hardware: 'Optional[SpaceHardware]' = None, storage: 'Optional[SpaceStorage]' = None, sleep_time: 'Optional[int]' = None, secrets: 'Optional[List[Dict[str, str]]]' = None, variables: 'Optional[List[Dict[str, str]]]' = None) -> 'RepoUrl'",
+        "doc": "Duplicate a Space.\n\nProgrammatically duplicate a Space. The new Space will be created in your account and will be in the same state\nas the original Space (running or paused). You can duplicate a Space...",
+        "parameters": [
+          "from_id",
+          "to_id",
+          "private",
+          "token",
+          "exist_ok",
+          "hardware",
+          "storage",
+          "sleep_time",
+          "secrets",
+          "variables"
+        ]
+      },
+      {
+        "name": "get_space_runtime",
+        "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'SpaceRuntime'",
+        "doc": "Gets runtime information about a Space.\n\nArgs:\n    repo_id (`str`):\n        ID of the repo to update. Example: `\"bigcode/in-the-stack\"`.\n    token (Union[bool, str, None], optional):\n        A valid u...",
+        "parameters": [
+          "repo_id",
+          "token"
+        ]
+      },
+      {
+        "name": "get_space_variables",
+        "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'Dict[str, SpaceVariable]'",
+        "doc": "Gets all variables from a Space.\n\nVariables allow to set environment variables to a Space without hardcoding them.\nFor more details, see https://huggingface.co/docs/hub/spaces-overview#managing-secret...",
+        "parameters": [
+          "repo_id",
+          "token"
+        ]
+      },
+      {
+        "name": "list_spaces",
+        "signature": "(*, filter: 'Union[str, Iterable[str], None]' = None, author: 'Optional[str]' = None, search: 'Optional[str]' = None, datasets: 'Union[str, Iterable[str], None]' = None, models: 'Union[str, Iterable[str], None]' = None, linked: 'bool' = False, sort: \"Union[Literal['last_modified'], str, None]\" = None, direction: 'Optional[Literal[-1]]' = None, limit: 'Optional[int]' = None, expand: 'Optional[List[ExpandSpaceProperty_T]]' = None, full: 'Optional[bool]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[SpaceInfo]'",
+        "doc": "List spaces hosted on the Huggingface Hub, given some filters.\n\nArgs:\n    filter (`str` or `Iterable`, *optional*):\n        A string tag or list of tags that can be used to identify Spaces on the Hub....",
+        "parameters": [
+          "filter",
+          "author",
+          "search",
+          "datasets",
+          "models",
+          "linked",
+          "sort",
+          "direction",
+          "limit",
+          "expand",
+          "full",
+          "token"
+        ]
+      },
+      {
+        "name": "pause_space",
+        "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'SpaceRuntime'",
+        "doc": "Pause your Space.\n\nA paused Space stops executing until manually restarted by its owner. This is different from the sleeping\nstate in which free Spaces go after 48h of inactivity. Paused time is not b...",
+        "parameters": [
+          "repo_id",
+          "token"
+        ]
+      },
+      {
+        "name": "request_space_hardware",
+        "signature": "(repo_id: 'str', hardware: 'SpaceHardware', *, token: 'Union[bool, str, None]' = None, sleep_time: 'Optional[int]' = None) -> 'SpaceRuntime'",
+        "doc": "Request new hardware for a Space.\n\nArgs:\n    repo_id (`str`):\n        ID of the repo to update. Example: `\"bigcode/in-the-stack\"`.\n    hardware (`str` or [`SpaceHardware`]):\n        Hardware on which ...",
+        "parameters": [
+          "repo_id",
+          "hardware",
+          "token",
+          "sleep_time"
+        ]
+      },
+      {
+        "name": "request_space_storage",
+        "signature": "(repo_id: 'str', storage: 'SpaceStorage', *, token: 'Union[bool, str, None]' = None) -> 'SpaceRuntime'",
+        "doc": "Request persistent storage for a Space.\n\nArgs:\n    repo_id (`str`):\n        ID of the Space to update. Example: `\"open-llm-leaderboard/open_llm_leaderboard\"`.\n    storage (`str` or [`SpaceStorage`]):\n...",
+        "parameters": [
+          "repo_id",
+          "storage",
+          "token"
+        ]
+      },
+      {
+        "name": "restart_space",
+        "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None, factory_reboot: 'bool' = False) -> 'SpaceRuntime'",
+        "doc": "Restart your Space.\n\nThis is the only way to programmatically restart a Space if you've put it on Pause (see [`pause_space`]). You\nmust be the owner of the Space to restart it. If you are using an upg...",
+        "parameters": [
+          "repo_id",
+          "token",
+          "factory_reboot"
+        ]
+      },
+      {
+        "name": "set_space_sleep_time",
+        "signature": "(repo_id: 'str', sleep_time: 'int', *, token: 'Union[bool, str, None]' = None) -> 'SpaceRuntime'",
+        "doc": "Set a custom sleep time for a Space running on upgraded hardware..\n\nYour Space will go to sleep after X seconds of inactivity. You are not billed when your Space is in \"sleep\"\nmode. If a new visitor l...",
+        "parameters": [
+          "repo_id",
+          "sleep_time",
+          "token"
+        ]
+      },
+      {
+        "name": "space_info",
+        "signature": "(repo_id: 'str', *, revision: 'Optional[str]' = None, timeout: 'Optional[float]' = None, files_metadata: 'bool' = False, expand: 'Optional[List[ExpandSpaceProperty_T]]' = None, token: 'Union[bool, str, None]' = None) -> 'SpaceInfo'",
+        "doc": "Get info on one specific Space on huggingface.co.\n\nSpace can be private if you pass an acceptable token.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separ...",
+        "parameters": [
+          "repo_id",
+          "revision",
+          "timeout",
+          "files_metadata",
+          "expand",
+          "token"
+        ]
+      }
+    ],
+    "File Operations": [
+      {
+        "name": "delete_file",
+        "signature": "(path_in_repo: 'str', repo_id: 'str', *, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, commit_description: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, parent_commit: 'Optional[str]' = None) -> 'CommitInfo'",
+        "doc": "Deletes a file in the given repo.\n\nArgs:\n    path_in_repo (`str`):\n        Relative filepath in the repo, for example:\n        `\"checkpoints/1fec34a/weights.bin\"`\n    repo_id (`str`):\n        The repo...",
+        "parameters": [
+          "path_in_repo",
+          "repo_id",
+          "token",
+          "repo_type",
+          "revision",
+          "commit_message",
+          "commit_description",
+          "create_pr",
+          "parent_commit"
+        ]
+      },
+      {
+        "name": "delete_files",
+        "signature": "(repo_id: 'str', delete_patterns: 'List[str]', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, commit_description: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, parent_commit: 'Optional[str]' = None) -> 'CommitInfo'",
+        "doc": "Delete files from a repository on the Hub.\n\nIf a folder path is provided, the entire folder is deleted as well as\nall files it contained.\n\nArgs:\n    repo_id (`str`):\n        The repository from which ...",
+        "parameters": [
+          "repo_id",
+          "delete_patterns",
+          "token",
+          "repo_type",
+          "revision",
+          "commit_message",
+          "commit_description",
+          "create_pr",
+          "parent_commit"
+        ]
+      },
+      {
+        "name": "file_exists",
+        "signature": "(repo_id: 'str', filename: 'str', *, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'bool'",
+        "doc": "Checks if a file exists in a repository on the Hugging Face Hub.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    filename (`st...",
+        "parameters": [
+          "repo_id",
+          "filename",
+          "repo_type",
+          "revision",
+          "token"
+        ]
+      },
+      {
+        "name": "get_hf_file_metadata",
+        "signature": "(*, url: 'str', token: 'Union[bool, str, None]' = None, proxies: 'Optional[Dict]' = None, timeout: 'Optional[float]' = 10) -> 'HfFileMetadata'",
+        "doc": "Fetch metadata of a file versioned on the Hub for a given url.\n\nArgs:\n    url (`str`):\n        File url, for example returned by [`hf_hub_url`].\n    token (Union[bool, str, None], optional):\n        A...",
+        "parameters": [
+          "url",
+          "token",
+          "proxies",
+          "timeout"
+        ]
+      },
+      {
+        "name": "hf_hub_download",
+        "signature": "(repo_id: 'str', filename: 'str', *, subfolder: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, cache_dir: 'Union[str, Path, None]' = None, local_dir: 'Union[str, Path, None]' = None, force_download: 'bool' = False, proxies: 'Optional[Dict]' = None, etag_timeout: 'float' = 10, token: 'Union[bool, str, None]' = None, local_files_only: 'bool' = False, resume_download: 'Optional[bool]' = None, force_filename: 'Optional[str]' = None, local_dir_use_symlinks: \"Union[bool, Literal['auto']]\" = 'auto') -> 'str'",
+        "doc": "Download a given file if it's not already present in the local cache.\n\nThe new cache file layout looks like this:\n- The cache directory contains one subfolder per repo_id (namespaced by repo type)\n- i...",
+        "parameters": [
+          "repo_id",
+          "filename",
+          "subfolder",
+          "repo_type",
+          "revision",
+          "cache_dir",
+          "local_dir",
+          "force_download",
+          "proxies",
+          "etag_timeout",
+          "token",
+          "local_files_only",
+          "resume_download",
+          "force_filename",
+          "local_dir_use_symlinks"
+        ]
+      },
+      {
+        "name": "list_lfs_files",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[LFSFileInfo]'",
+        "doc": "List all LFS files in a repo on the Hub.\n\nThis is primarily useful to count how much storage a repo is using and to eventually clean up large files\nwith [`permanently_delete_lfs_files`]. Note that thi...",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "parse_safetensors_file_metadata",
+        "signature": "(repo_id: 'str', filename: 'str', *, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'SafetensorsFileMetadata'",
+        "doc": "Parse metadata from a safetensors file on the Hub.\n\nTo parse metadata from all safetensors files in a repo at once, use [`get_safetensors_metadata`].\n\nFor more details regarding the safetensors format...",
+        "parameters": [
+          "repo_id",
+          "filename",
+          "repo_type",
+          "revision",
+          "token"
+        ]
+      },
+      {
+        "name": "permanently_delete_lfs_files",
+        "signature": "(repo_id: 'str', lfs_files: 'Iterable[LFSFileInfo]', *, rewrite_history: 'bool' = True, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Permanently delete LFS files from a repo on the Hub.\n\n<Tip warning={true}>\n\nThis is a permanent action that will affect all commits referencing the deleted files and might corrupt your\nrepository. Thi...",
+        "parameters": [
+          "repo_id",
+          "lfs_files",
+          "rewrite_history",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "preupload_lfs_files",
+        "signature": "(repo_id: 'str', additions: 'Iterable[CommitOperationAdd]', *, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, num_threads: 'int' = 5, free_memory: 'bool' = True, gitignore_content: 'Optional[str]' = None)",
+        "doc": "Pre-upload LFS files to S3 in preparation on a future commit.\n\nThis method is useful if you are generating the files to upload on-the-fly and you don't want to store them\nin memory before uploading th...",
+        "parameters": [
+          "repo_id",
+          "additions",
+          "token",
+          "repo_type",
+          "revision",
+          "create_pr",
+          "num_threads",
+          "free_memory",
+          "gitignore_content"
+        ]
+      },
+      {
+        "name": "snapshot_download",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, cache_dir: 'Union[str, Path, None]' = None, local_dir: 'Union[str, Path, None]' = None, proxies: 'Optional[Dict]' = None, etag_timeout: 'float' = 10, force_download: 'bool' = False, token: 'Union[bool, str, None]' = None, local_files_only: 'bool' = False, allow_patterns: 'Optional[Union[List[str], str]]' = None, ignore_patterns: 'Optional[Union[List[str], str]]' = None, max_workers: 'int' = 8, tqdm_class: 'Optional[Type[base_tqdm]]' = None, local_dir_use_symlinks: \"Union[bool, Literal['auto']]\" = 'auto', resume_download: 'Optional[bool]' = None) -> 'str'",
+        "doc": "Download repo files.\n\nDownload a whole snapshot of a repo's files at the specified revision. This is useful when you want all files from\na repo, because you don't know which ones you will need a prior...",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "revision",
+          "cache_dir",
+          "local_dir",
+          "proxies",
+          "etag_timeout",
+          "force_download",
+          "token",
+          "local_files_only",
+          "allow_patterns",
+          "ignore_patterns",
+          "max_workers",
+          "tqdm_class",
+          "local_dir_use_symlinks",
+          "resume_download"
+        ]
+      },
+      {
+        "name": "upload_file",
+        "signature": "(*, path_or_fileobj: 'Union[str, Path, bytes, BinaryIO]', path_in_repo: 'str', repo_id: 'str', token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, commit_description: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, parent_commit: 'Optional[str]' = None, run_as_future: 'bool' = False) -> 'Union[CommitInfo, Future[CommitInfo]]'",
+        "doc": "Upload a local file (up to 50 GB) to the given repo. The upload is done\nthrough a HTTP post request, and doesn't require git or git-lfs to be\ninstalled.\n\nArgs:\n    path_or_fileobj (`str`, `Path`, `byt...",
+        "parameters": [
+          "path_or_fileobj",
+          "path_in_repo",
+          "repo_id",
+          "token",
+          "repo_type",
+          "revision",
+          "commit_message",
+          "commit_description",
+          "create_pr",
+          "parent_commit",
+          "run_as_future"
+        ]
+      },
+      {
+        "name": "upload_folder",
+        "signature": "(*, repo_id: 'str', folder_path: 'Union[str, Path]', path_in_repo: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, commit_description: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, parent_commit: 'Optional[str]' = None, allow_patterns: 'Optional[Union[List[str], str]]' = None, ignore_patterns: 'Optional[Union[List[str], str]]' = None, delete_patterns: 'Optional[Union[List[str], str]]' = None, run_as_future: 'bool' = False) -> 'Union[CommitInfo, Future[CommitInfo]]'",
+        "doc": "Upload a local folder to the given repo. The upload is done through a HTTP requests, and doesn't require git or\ngit-lfs to be installed.\n\nThe structure of the folder will be preserved. Files with the ...",
+        "parameters": [
+          "repo_id",
+          "folder_path",
+          "path_in_repo",
+          "commit_message",
+          "commit_description",
+          "token",
+          "repo_type",
+          "revision",
+          "create_pr",
+          "parent_commit",
+          "allow_patterns",
+          "ignore_patterns",
+          "delete_patterns",
+          "run_as_future"
+        ]
+      },
+      {
+        "name": "upload_large_folder",
+        "signature": "(repo_id: 'str', folder_path: 'Union[str, Path]', *, repo_type: 'str', revision: 'Optional[str]' = None, private: 'Optional[bool]' = None, allow_patterns: 'Optional[Union[List[str], str]]' = None, ignore_patterns: 'Optional[Union[List[str], str]]' = None, num_workers: 'Optional[int]' = None, print_report: 'bool' = True, print_report_every: 'int' = 60) -> 'None'",
+        "doc": "Upload a large folder to the Hub in the most resilient way possible.\n\nSeveral workers are started to upload files in an optimized way. Before being committed to a repo, files must be\nhashed and be pre...",
+        "parameters": [
+          "repo_id",
+          "folder_path",
+          "repo_type",
+          "revision",
+          "private",
+          "allow_patterns",
+          "ignore_patterns",
+          "num_workers",
+          "print_report",
+          "print_report_every"
+        ]
+      }
+    ],
+    "Search & Discovery": [
+      {
+        "name": "get_collection",
+        "signature": "(collection_slug: 'str', *, token: 'Union[bool, str, None]' = None) -> 'Collection'",
+        "doc": "Gets information about a Collection on the Hub.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection of the Hub. Example: `\"TheBloke/recent-models-64f9a55bb3115b4f513ec026\"`.\n    token (...",
+        "parameters": [
+          "collection_slug",
+          "token"
+        ]
+      },
+      {
+        "name": "get_discussion_details",
+        "signature": "(repo_id: 'str', discussion_num: 'int', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'DiscussionWithDetails'",
+        "doc": "Fetches a Discussion's / Pull Request 's details from the Hub.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num ...",
+        "parameters": [
+          "repo_id",
+          "discussion_num",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "get_inference_endpoint",
+        "signature": "(name: 'str', *, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+        "doc": "Get information about an Inference Endpoint.\n\nArgs:\n    name (`str`):\n        The name of the Inference Endpoint to retrieve information about.\n    namespace (`str`, *optional*):\n        The namespace...",
+        "parameters": [
+          "name",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "get_paths_info",
+        "signature": "(repo_id: 'str', paths: 'Union[List[str], str]', *, expand: 'bool' = False, revision: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'List[Union[RepoFile, RepoFolder]]'",
+        "doc": "Get information about a repo's paths.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated by a `/`.\n    paths (`Union[List[str], str]`, *optional*):\n   ...",
+        "parameters": [
+          "repo_id",
+          "paths",
+          "expand",
+          "revision",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "get_safetensors_metadata",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'SafetensorsRepoMetadata'",
+        "doc": "Parse metadata for a safetensors repo on the Hub.\n\nWe first check if the repo has a single safetensors file or a sharded safetensors repo. If it's a single\nsafetensors file, we parse the metadata from...",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "revision",
+          "token"
+        ]
+      },
+      {
+        "name": "get_token_permission",
+        "signature": "(token: 'Union[bool, str, None]' = None) -> \"Literal['read', 'write', 'fineGrained', None]\"",
+        "doc": "Check if a given `token` is valid and return its permissions.\n\n<Tip warning={true}>\n\nThis method is deprecated and will be removed in version 1.0. Permissions are more complex than when\n`get_token_per...",
+        "parameters": [
+          "token"
+        ]
+      },
+      {
+        "name": "get_user_overview",
+        "signature": "(username: 'str', token: 'Union[bool, str, None]' = None) -> 'User'",
+        "doc": "Get an overview of a user on the Hub.\n\nArgs:\n    username (`str`):\n        Username of the user to get an overview of.\n    token (Union[bool, str, None], optional):\n        A valid user access token (...",
+        "parameters": [
+          "username",
+          "token"
+        ]
+      },
+      {
+        "name": "get_webhook",
+        "signature": "(webhook_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'WebhookInfo'",
+        "doc": "Get a webhook by its id.\n\nArgs:\n    webhook_id (`str`):\n        The unique identifier of the webhook to get.\n    token (Union[bool, str, None], optional):\n        A valid user access token (string). D...",
+        "parameters": [
+          "webhook_id",
+          "token"
+        ]
+      },
+      {
+        "name": "list_accepted_access_requests",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'List[AccessRequest]'",
+        "doc": "Get accepted access requests for a given gated repo.\n\nAn accepted request means the user has requested access to the repo and the request has been accepted. The user\ncan download any file of the repo....",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "list_collections",
+        "signature": "(*, owner: 'Union[List[str], str, None]' = None, item: 'Union[List[str], str, None]' = None, sort: \"Optional[Literal['lastModified', 'trending', 'upvotes']]\" = None, limit: 'Optional[int]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[Collection]'",
+        "doc": "List collections on the Huggingface Hub, given some filters.\n\n<Tip warning={true}>\n\nWhen listing collections, the item list per collection is truncated to 4 items maximum. To retrieve all items\nfrom a...",
+        "parameters": [
+          "owner",
+          "item",
+          "sort",
+          "limit",
+          "token"
+        ]
+      },
+      {
+        "name": "list_inference_catalog",
+        "signature": "(*, token: 'Union[bool, str, None]' = None) -> 'List[str]'",
+        "doc": "List models available in the Hugging Face Inference Catalog.\n\nThe goal of the Inference Catalog is to provide a curated list of models that are optimized for inference\nand for which default configurat...",
+        "parameters": [
+          "token"
+        ]
+      },
+      {
+        "name": "list_inference_endpoints",
+        "signature": "(namespace: 'Optional[str]' = None, *, token: 'Union[bool, str, None]' = None) -> 'List[InferenceEndpoint]'",
+        "doc": "Lists all inference endpoints for the given namespace.\n\nArgs:\n    namespace (`str`, *optional*):\n        The namespace to list endpoints for. Defaults to the current user. Set to `\"*\"` to list all end...",
+        "parameters": [
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "list_jobs",
+        "signature": "(*, timeout: 'Optional[int]' = None, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'List[JobInfo]'",
+        "doc": "List compute Jobs on Hugging Face infrastructure.\n\nArgs:\n    timeout (`float`, *optional*):\n        Whether to set a timeout for the request to the Hub.\n\n    namespace (`str`, *optional*):\n        The...",
+        "parameters": [
+          "timeout",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "list_organization_members",
+        "signature": "(organization: 'str', token: 'Union[bool, str, None]' = None) -> 'Iterable[User]'",
+        "doc": "List of members of an organization on the Hub.\n\nArgs:\n    organization (`str`):\n        Name of the organization to get the members of.\n    token (Union[bool, str, None], optional):\n        A valid us...",
+        "parameters": [
+          "organization",
+          "token"
+        ]
+      },
+      {
+        "name": "list_papers",
+        "signature": "(*, query: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[PaperInfo]'",
+        "doc": "List daily papers on the Hugging Face Hub given a search query.\n\nArgs:\n    query (`str`, *optional*):\n        A search query string to find papers.\n        If provided, returns papers that match the q...",
+        "parameters": [
+          "query",
+          "token"
+        ]
+      },
+      {
+        "name": "list_pending_access_requests",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'List[AccessRequest]'",
+        "doc": "Get pending access requests for a given gated repo.\n\nA pending request means the user has requested access to the repo but the request has not been processed yet.\nIf the approval mode is automatic, th...",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "list_rejected_access_requests",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'List[AccessRequest]'",
+        "doc": "Get rejected access requests for a given gated repo.\n\nA rejected request means the user has requested access to the repo and the request has been explicitly rejected\nby a repo owner (either you or ano...",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "list_user_followers",
+        "signature": "(username: 'str', token: 'Union[bool, str, None]' = None) -> 'Iterable[User]'",
+        "doc": "Get the list of followers of a user on the Hub.\n\nArgs:\n    username (`str`):\n        Username of the user to get the followers of.\n    token (Union[bool, str, None], optional):\n        A valid user ac...",
+        "parameters": [
+          "username",
+          "token"
+        ]
+      },
+      {
+        "name": "list_user_following",
+        "signature": "(username: 'str', token: 'Union[bool, str, None]' = None) -> 'Iterable[User]'",
+        "doc": "Get the list of users followed by a user on the Hub.\n\nArgs:\n    username (`str`):\n        Username of the user to get the users followed by.\n    token (Union[bool, str, None], optional):\n        A val...",
+        "parameters": [
+          "username",
+          "token"
+        ]
+      },
+      {
+        "name": "list_webhooks",
+        "signature": "(*, token: 'Union[bool, str, None]' = None) -> 'List[WebhookInfo]'",
+        "doc": "List all configured webhooks.\n\nArgs:\n    token (Union[bool, str, None], optional):\n        A valid user access token (string). Defaults to the locally saved token, which is the recommended\n        met...",
+        "parameters": [
+          "token"
+        ]
+      },
+      {
+        "name": "paper_info",
+        "signature": "(id: 'str') -> 'PaperInfo'",
+        "doc": "Get information for a paper on the Hub.\n\nArgs:\n    id (`str`, **optional**):\n        ArXiv id of the paper.\n\nReturns:\n    `PaperInfo`: A `PaperInfo` object.\n\nRaises:\n    [`HTTPError`](https://requests...",
+        "parameters": [
+          "id"
+        ]
+      }
+    ],
+    "Authentication": [
+      {
+        "name": "auth_check",
+        "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Check if the provided user token has access to a specific repository on the Hugging Face Hub.\n\nThis method verifies whether the user, authenticated via the provided token, has access to the specified\n...",
+        "parameters": [
+          "repo_id",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "whoami",
+        "signature": "(token: 'Union[bool, str, None]' = None) -> 'Dict'",
+        "doc": "Call HF API to know \"whoami\".\n\nArgs:\n    token (Union[bool, str, None], optional):\n        A valid user access token (string). Defaults to the locally saved\n        token, which is the recommended met...",
+        "parameters": [
+          "token"
+        ]
+      }
+    ],
+    "Other": [
+      {
+        "name": "accept_access_request",
+        "signature": "(repo_id: 'str', user: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Accept an access request from a user for a given gated repo.\n\nOnce the request is accepted, the user will be able to download any file of the repo and access the community\ntab. If the approval mode is...",
+        "parameters": [
+          "repo_id",
+          "user",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "add_collection_item",
+        "signature": "(collection_slug: 'str', item_id: 'str', item_type: 'CollectionItemType_T', *, note: 'Optional[str]' = None, exists_ok: 'bool' = False, token: 'Union[bool, str, None]' = None) -> 'Collection'",
+        "doc": "Add an item to a collection on the Hub.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection to update. Example: `\"TheBloke/recent-models-64f9a55bb3115b4f513ec026\"`.\n    item_id (`str`):...",
+        "parameters": [
+          "collection_slug",
+          "item_id",
+          "item_type",
+          "note",
+          "exists_ok",
+          "token"
+        ]
+      },
+      {
+        "name": "cancel_access_request",
+        "signature": "(repo_id: 'str', user: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Cancel an access request from a user for a given gated repo.\n\nA cancelled request will go back to the pending list and the user will lose access to the repo.\n\nFor more info about gated repos, see http...",
+        "parameters": [
+          "repo_id",
+          "user",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "cancel_job",
+        "signature": "(*, job_id: 'str', namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Cancel a compute Job on Hugging Face infrastructure.\n\nArgs:\n    job_id (`str`):\n        ID of the Job.\n\n    namespace (`str`, *optional*):\n        The namespace where the Job is running. Defaults to t...",
+        "parameters": [
+          "job_id",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "change_discussion_status",
+        "signature": "(repo_id: 'str', discussion_num: 'int', new_status: \"Literal['open', 'closed']\", *, token: 'Union[bool, str, None]' = None, comment: 'Optional[str]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionStatusChange'",
+        "doc": "Closes or re-opens a Discussion or Pull Request.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num (`int`):\n     ...",
+        "parameters": [
+          "repo_id",
+          "discussion_num",
+          "new_status",
+          "token",
+          "comment",
+          "repo_type"
+        ]
+      },
+      {
+        "name": "comment_discussion",
+        "signature": "(repo_id: 'str', discussion_num: 'int', comment: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionComment'",
+        "doc": "Creates a new comment on the given Discussion.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num (`int`):\n       ...",
+        "parameters": [
+          "repo_id",
+          "discussion_num",
+          "comment",
+          "token",
+          "repo_type"
+        ]
+      },
+      {
+        "name": "create_branch",
+        "signature": "(repo_id: 'str', *, branch: 'str', revision: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None, exist_ok: 'bool' = False) -> 'None'",
+        "doc": "Create a new branch for a repo on the Hub, starting from the specified revision (defaults to `main`).\nTo find a revision suiting your needs, you can use [`list_repo_refs`] or [`list_repo_commits`].\n\nA...",
+        "parameters": [
+          "repo_id",
+          "branch",
+          "revision",
+          "token",
+          "repo_type",
+          "exist_ok"
+        ]
+      },
+      {
+        "name": "create_collection",
+        "signature": "(title: 'str', *, namespace: 'Optional[str]' = None, description: 'Optional[str]' = None, private: 'bool' = False, exists_ok: 'bool' = False, token: 'Union[bool, str, None]' = None) -> 'Collection'",
+        "doc": "Create a new Collection on the Hub.\n\nArgs:\n    title (`str`):\n        Title of the collection to create. Example: `\"Recent models\"`.\n    namespace (`str`, *optional*):\n        Namespace of the collect...",
+        "parameters": [
+          "title",
+          "namespace",
+          "description",
+          "private",
+          "exists_ok",
+          "token"
+        ]
+      },
+      {
+        "name": "create_commit",
+        "signature": "(repo_id: 'str', operations: 'Iterable[CommitOperation]', *, commit_message: 'str', commit_description: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, num_threads: 'int' = 5, parent_commit: 'Optional[str]' = None, run_as_future: 'bool' = False) -> 'Union[CommitInfo, Future[CommitInfo]]'",
+        "doc": "Creates a commit in the given repo, deleting & uploading files as needed.\n\n<Tip warning={true}>\n\nThe input list of `CommitOperation` will be mutated during the commit process. Do not reuse the same ob...",
+        "parameters": [
+          "repo_id",
+          "operations",
+          "commit_message",
+          "commit_description",
+          "token",
+          "repo_type",
+          "revision",
+          "create_pr",
+          "num_threads",
+          "parent_commit",
+          "run_as_future"
+        ]
+      },
+      {
+        "name": "create_discussion",
+        "signature": "(repo_id: 'str', title: 'str', *, token: 'Union[bool, str, None]' = None, description: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, pull_request: 'bool' = False) -> 'DiscussionWithDetails'",
+        "doc": "Creates a Discussion or Pull Request.\n\nPull Requests created programmatically will be in `\"draft\"` status.\n\nCreating a Pull Request with changes can also be done at once with [`HfApi.create_commit`].\n...",
+        "parameters": [
+          "repo_id",
+          "title",
+          "token",
+          "description",
+          "repo_type",
+          "pull_request"
+        ]
+      },
+      {
+        "name": "create_inference_endpoint",
+        "signature": "(name: 'str', *, repository: 'str', framework: 'str', accelerator: 'str', instance_size: 'str', instance_type: 'str', region: 'str', vendor: 'str', account_id: 'Optional[str]' = None, min_replica: 'int' = 1, max_replica: 'int' = 1, scale_to_zero_timeout: 'Optional[int]' = None, revision: 'Optional[str]' = None, task: 'Optional[str]' = None, custom_image: 'Optional[Dict]' = None, env: 'Optional[Dict[str, str]]' = None, secrets: 'Optional[Dict[str, str]]' = None, type: 'InferenceEndpointType' = <InferenceEndpointType.PROTECTED: 'protected'>, domain: 'Optional[str]' = None, path: 'Optional[str]' = None, cache_http_responses: 'Optional[bool]' = None, tags: 'Optional[List[str]]' = None, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+        "doc": "Create a new Inference Endpoint.\n\nArgs:\n    name (`str`):\n        The unique name for the new Inference Endpoint.\n    repository (`str`):\n        The name of the model repository associated with the I...",
+        "parameters": [
+          "name",
+          "repository",
+          "framework",
+          "accelerator",
+          "instance_size",
+          "instance_type",
+          "region",
+          "vendor",
+          "account_id",
+          "min_replica",
+          "max_replica",
+          "scale_to_zero_timeout",
+          "revision",
+          "task",
+          "custom_image",
+          "env",
+          "secrets",
+          "type",
+          "domain",
+          "path",
+          "cache_http_responses",
+          "tags",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "create_inference_endpoint_from_catalog",
+        "signature": "(repo_id: 'str', *, name: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None, namespace: 'Optional[str]' = None) -> 'InferenceEndpoint'",
+        "doc": "Create a new Inference Endpoint from a model in the Hugging Face Inference Catalog.\n\nThe goal of the Inference Catalog is to provide a curated list of models that are optimized for inference\nand for w...",
+        "parameters": [
+          "repo_id",
+          "name",
+          "token",
+          "namespace"
+        ]
+      },
+      {
+        "name": "create_pull_request",
+        "signature": "(repo_id: 'str', title: 'str', *, token: 'Union[bool, str, None]' = None, description: 'Optional[str]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionWithDetails'",
+        "doc": "Creates a Pull Request . Pull Requests created programmatically will be in `\"draft\"` status.\n\nCreating a Pull Request with changes can also be done at once with [`HfApi.create_commit`];\n\nThis is a wra...",
+        "parameters": [
+          "repo_id",
+          "title",
+          "token",
+          "description",
+          "repo_type"
+        ]
+      },
+      {
+        "name": "create_tag",
+        "signature": "(repo_id: 'str', *, tag: 'str', tag_message: 'Optional[str]' = None, revision: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None, exist_ok: 'bool' = False) -> 'None'",
+        "doc": "Tag a given commit of a repo on the Hub.\n\nArgs:\n    repo_id (`str`):\n        The repository in which a commit will be tagged.\n        Example: `\"user/my-cool-model\"`.\n\n    tag (`str`):\n        The nam...",
+        "parameters": [
+          "repo_id",
+          "tag",
+          "tag_message",
+          "revision",
+          "token",
+          "repo_type",
+          "exist_ok"
+        ]
+      },
+      {
+        "name": "create_webhook",
+        "signature": "(*, url: 'str', watched: 'List[Union[Dict, WebhookWatchedItem]]', domains: 'Optional[List[constants.WEBHOOK_DOMAIN_T]]' = None, secret: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'WebhookInfo'",
+        "doc": "Create a new webhook.\n\nArgs:\n    url (`str`):\n        URL to send the payload to.\n    watched (`List[WebhookWatchedItem]`):\n        List of [`WebhookWatchedItem`] to be watched by the webhook. It can ...",
+        "parameters": [
+          "url",
+          "watched",
+          "domains",
+          "secret",
+          "token"
+        ]
+      },
+      {
+        "name": "delete_branch",
+        "signature": "(repo_id: 'str', *, branch: 'str', token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'None'",
+        "doc": "Delete a branch from a repo on the Hub.\n\nArgs:\n    repo_id (`str`):\n        The repository in which a branch will be deleted.\n        Example: `\"user/my-cool-model\"`.\n\n    branch (`str`):\n        The ...",
+        "parameters": [
+          "repo_id",
+          "branch",
+          "token",
+          "repo_type"
+        ]
+      },
+      {
+        "name": "delete_collection",
+        "signature": "(collection_slug: 'str', *, missing_ok: 'bool' = False, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Delete a collection on the Hub.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection to delete. Example: `\"TheBloke/recent-models-64f9a55bb3115b4f513ec026\"`.\n    missing_ok (`bool`, *opt...",
+        "parameters": [
+          "collection_slug",
+          "missing_ok",
+          "token"
+        ]
+      },
+      {
+        "name": "delete_collection_item",
+        "signature": "(collection_slug: 'str', item_object_id: 'str', *, missing_ok: 'bool' = False, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Delete an item from a collection.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection to update. Example: `\"TheBloke/recent-models-64f9a55bb3115b4f513ec026\"`.\n    item_object_id (`str`)...",
+        "parameters": [
+          "collection_slug",
+          "item_object_id",
+          "missing_ok",
+          "token"
+        ]
+      },
+      {
+        "name": "delete_folder",
+        "signature": "(path_in_repo: 'str', repo_id: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, commit_description: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, parent_commit: 'Optional[str]' = None) -> 'CommitInfo'",
+        "doc": "Deletes a folder in the given repo.\n\nSimple wrapper around [`create_commit`] method.\n\nArgs:\n    path_in_repo (`str`):\n        Relative folder path in the repo, for example: `\"checkpoints/1fec34a\"`.\n  ...",
+        "parameters": [
+          "path_in_repo",
+          "repo_id",
+          "token",
+          "repo_type",
+          "revision",
+          "commit_message",
+          "commit_description",
+          "create_pr",
+          "parent_commit"
+        ]
+      },
+      {
+        "name": "delete_inference_endpoint",
+        "signature": "(name: 'str', *, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Delete an Inference Endpoint.\n\nThis operation is not reversible. If you don't want to be charged for an Inference Endpoint, it is preferable\nto pause it with [`pause_inference_endpoint`] or scale it t...",
+        "parameters": [
+          "name",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "delete_tag",
+        "signature": "(repo_id: 'str', *, tag: 'str', token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'None'",
+        "doc": "Delete a tag from a repo on the Hub.\n\nArgs:\n    repo_id (`str`):\n        The repository in which a tag will be deleted.\n        Example: `\"user/my-cool-model\"`.\n\n    tag (`str`):\n        The name of t...",
+        "parameters": [
+          "repo_id",
+          "tag",
+          "token",
+          "repo_type"
+        ]
+      },
+      {
+        "name": "delete_webhook",
+        "signature": "(webhook_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Delete a webhook.\n\nArgs:\n    webhook_id (`str`):\n        The unique identifier of the webhook to delete.\n    token (Union[bool, str, None], optional):\n        A valid user access token (string). Defau...",
+        "parameters": [
+          "webhook_id",
+          "token"
+        ]
+      },
+      {
+        "name": "disable_webhook",
+        "signature": "(webhook_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'WebhookInfo'",
+        "doc": "Disable a webhook (makes it \"disabled\").\n\nArgs:\n    webhook_id (`str`):\n        The unique identifier of the webhook to disable.\n    token (Union[bool, str, None], optional):\n        A valid user acce...",
+        "parameters": [
+          "webhook_id",
+          "token"
+        ]
+      },
+      {
+        "name": "edit_discussion_comment",
+        "signature": "(repo_id: 'str', discussion_num: 'int', comment_id: 'str', new_content: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionComment'",
+        "doc": "Edits a comment on a Discussion / Pull Request.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num (`int`):\n      ...",
+        "parameters": [
+          "repo_id",
+          "discussion_num",
+          "comment_id",
+          "new_content",
+          "token",
+          "repo_type"
+        ]
+      },
+      {
+        "name": "enable_webhook",
+        "signature": "(webhook_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'WebhookInfo'",
+        "doc": "Enable a webhook (makes it \"active\").\n\nArgs:\n    webhook_id (`str`):\n        The unique identifier of the webhook to enable.\n    token (Union[bool, str, None], optional):\n        A valid user access t...",
+        "parameters": [
+          "webhook_id",
+          "token"
+        ]
+      },
+      {
+        "name": "fetch_job_logs",
+        "signature": "(*, job_id: 'str', namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[str]'",
+        "doc": "Fetch all the logs from a compute Job on Hugging Face infrastructure.\n\nArgs:\n    job_id (`str`):\n        ID of the Job.\n\n    namespace (`str`, *optional*):\n        The namespace where the Job is runni...",
+        "parameters": [
+          "job_id",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "grant_access",
+        "signature": "(repo_id: 'str', user: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Grant access to a user for a given gated repo.\n\nGranting access don't require for the user to send an access request by themselves. The user is automatically\nadded to the accepted list meaning they ca...",
+        "parameters": [
+          "repo_id",
+          "user",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "hide_discussion_comment",
+        "signature": "(repo_id: 'str', discussion_num: 'int', comment_id: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionComment'",
+        "doc": "Hides a comment on a Discussion / Pull Request.\n\n<Tip warning={true}>\nHidden comments' content cannot be retrieved anymore. Hiding a comment is irreversible.\n</Tip>\n\nArgs:\n    repo_id (`str`):\n       ...",
+        "parameters": [
+          "repo_id",
+          "discussion_num",
+          "comment_id",
+          "token",
+          "repo_type"
+        ]
+      },
+      {
+        "name": "inspect_job",
+        "signature": "(*, job_id: 'str', namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'JobInfo'",
+        "doc": "Inspect a compute Job on Hugging Face infrastructure.\n\nArgs:\n    job_id (`str`):\n        ID of the Job.\n\n    namespace (`str`, *optional*):\n        The namespace where the Job is running. Defaults to ...",
+        "parameters": [
+          "job_id",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "merge_pull_request",
+        "signature": "(repo_id: 'str', discussion_num: 'int', *, token: 'Union[bool, str, None]' = None, comment: 'Optional[str]' = None, repo_type: 'Optional[str]' = None)",
+        "doc": "Merges a Pull Request.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num (`int`):\n        The number of the Discu...",
+        "parameters": [
+          "repo_id",
+          "discussion_num",
+          "token",
+          "comment",
+          "repo_type"
+        ]
+      },
+      {
+        "name": "pause_inference_endpoint",
+        "signature": "(name: 'str', *, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+        "doc": "Pause an Inference Endpoint.\n\nA paused Inference Endpoint will not be charged. It can be resumed at any time using [`resume_inference_endpoint`].\nThis is different than scaling the Inference Endpoint ...",
+        "parameters": [
+          "name",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "reject_access_request",
+        "signature": "(repo_id: 'str', user: 'str', *, repo_type: 'Optional[str]' = None, rejection_reason: 'Optional[str]', token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Reject an access request from a user for a given gated repo.\n\nA rejected request will go to the rejected list. The user cannot download any file of the repo. Rejected\nrequests can be accepted or cance...",
+        "parameters": [
+          "repo_id",
+          "user",
+          "repo_type",
+          "rejection_reason",
+          "token"
+        ]
+      },
+      {
+        "name": "rename_discussion",
+        "signature": "(repo_id: 'str', discussion_num: 'int', new_title: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionTitleChange'",
+        "doc": "Renames a Discussion.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num (`int`):\n        The number of the Discus...",
+        "parameters": [
+          "repo_id",
+          "discussion_num",
+          "new_title",
+          "token",
+          "repo_type"
+        ]
+      },
+      {
+        "name": "resume_inference_endpoint",
+        "signature": "(name: 'str', *, namespace: 'Optional[str]' = None, running_ok: 'bool' = True, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+        "doc": "Resume an Inference Endpoint.\n\nFor convenience, you can also resume an Inference Endpoint using [`InferenceEndpoint.resume`].\n\nArgs:\n    name (`str`):\n        The name of the Inference Endpoint to res...",
+        "parameters": [
+          "name",
+          "namespace",
+          "running_ok",
+          "token"
+        ]
+      },
+      {
+        "name": "revision_exists",
+        "signature": "(repo_id: 'str', revision: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'bool'",
+        "doc": "Checks if a specific revision exists on a repo on the Hugging Face Hub.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    revisi...",
+        "parameters": [
+          "repo_id",
+          "revision",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "run_as_future",
+        "signature": "(fn: 'Callable[..., R]', *args, **kwargs) -> 'Future[R]'",
+        "doc": "Run a method in the background and return a Future instance.\n\nThe main goal is to run methods without blocking the main thread (e.g. to push data during a training).\nBackground jobs are queued to pres...",
+        "parameters": [
+          "fn",
+          "args",
+          "kwargs"
+        ]
+      },
+      {
+        "name": "run_job",
+        "signature": "(*, image: 'str', command: 'List[str]', env: 'Optional[Dict[str, Any]]' = None, secrets: 'Optional[Dict[str, Any]]' = None, flavor: 'Optional[SpaceHardware]' = None, timeout: 'Optional[Union[int, float, str]]' = None, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'JobInfo'",
+        "doc": "Run compute Jobs on Hugging Face infrastructure.\n\nArgs:\n    image (`str`):\n        The Docker image to use.\n        Examples: `\"ubuntu\"`, `\"python:3.12\"`, `\"pytorch/pytorch:2.6.0-cuda12.4-cudnn9-devel...",
+        "parameters": [
+          "image",
+          "command",
+          "env",
+          "secrets",
+          "flavor",
+          "timeout",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "run_uv_job",
+        "signature": "(script: 'str', *, script_args: 'Optional[List[str]]' = None, dependencies: 'Optional[List[str]]' = None, python: 'Optional[str]' = None, image: 'Optional[str]' = None, env: 'Optional[Dict[str, Any]]' = None, secrets: 'Optional[Dict[str, Any]]' = None, flavor: 'Optional[SpaceHardware]' = None, timeout: 'Optional[Union[int, float, str]]' = None, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None, _repo: 'Optional[str]' = None) -> 'JobInfo'",
+        "doc": "Run a UV script Job on Hugging Face infrastructure.\n\nArgs:\n    script (`str`):\n        Path or URL of the UV script.\n\n    script_args (`List[str]`, *optional*)\n        Arguments to pass to the script....",
+        "parameters": [
+          "script",
+          "script_args",
+          "dependencies",
+          "python",
+          "image",
+          "env",
+          "secrets",
+          "flavor",
+          "timeout",
+          "namespace",
+          "token",
+          "_repo"
+        ]
+      },
+      {
+        "name": "scale_to_zero_inference_endpoint",
+        "signature": "(name: 'str', *, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+        "doc": "Scale Inference Endpoint to zero.\n\nAn Inference Endpoint scaled to zero will not be charged. It will be resume on the next request to it, with a\ncold start delay. This is different than pausing the In...",
+        "parameters": [
+          "name",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "super_squash_history",
+        "signature": "(repo_id: 'str', *, branch: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'None'",
+        "doc": "Squash commit history on a branch for a repo on the Hub.\n\nSquashing the repo history is useful when you know you'll make hundreds of commits and you don't want to\nclutter the history. Squashing commit...",
+        "parameters": [
+          "repo_id",
+          "branch",
+          "commit_message",
+          "repo_type",
+          "token"
+        ]
+      },
+      {
+        "name": "unlike",
+        "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'None'",
+        "doc": "Unlike a given repo on the Hub (e.g. remove from favorite list).\n\nTo prevent spam usage, it is not possible to `like` a repository from a script.\n\nSee also [`list_liked_repos`].\n\nArgs:\n    repo_id (`s...",
+        "parameters": [
+          "repo_id",
+          "token",
+          "repo_type"
+        ]
+      },
+      {
+        "name": "update_collection_item",
+        "signature": "(collection_slug: 'str', item_object_id: 'str', *, note: 'Optional[str]' = None, position: 'Optional[int]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+        "doc": "Update an item in a collection.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection to update. Example: `\"TheBloke/recent-models-64f9a55bb3115b4f513ec026\"`.\n    item_object_id (`str`):\n...",
+        "parameters": [
+          "collection_slug",
+          "item_object_id",
+          "note",
+          "position",
+          "token"
+        ]
+      },
+      {
+        "name": "update_collection_metadata",
+        "signature": "(collection_slug: 'str', *, title: 'Optional[str]' = None, description: 'Optional[str]' = None, position: 'Optional[int]' = None, private: 'Optional[bool]' = None, theme: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Collection'",
+        "doc": "Update metadata of a collection on the Hub.\n\nAll arguments are optional. Only provided metadata will be updated.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection to update. Example: ...",
+        "parameters": [
+          "collection_slug",
+          "title",
+          "description",
+          "position",
+          "private",
+          "theme",
+          "token"
+        ]
+      },
+      {
+        "name": "update_inference_endpoint",
+        "signature": "(name: 'str', *, accelerator: 'Optional[str]' = None, instance_size: 'Optional[str]' = None, instance_type: 'Optional[str]' = None, min_replica: 'Optional[int]' = None, max_replica: 'Optional[int]' = None, scale_to_zero_timeout: 'Optional[int]' = None, repository: 'Optional[str]' = None, framework: 'Optional[str]' = None, revision: 'Optional[str]' = None, task: 'Optional[str]' = None, custom_image: 'Optional[Dict]' = None, env: 'Optional[Dict[str, str]]' = None, secrets: 'Optional[Dict[str, str]]' = None, domain: 'Optional[str]' = None, path: 'Optional[str]' = None, cache_http_responses: 'Optional[bool]' = None, tags: 'Optional[List[str]]' = None, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+        "doc": "Update an Inference Endpoint.\n\nThis method allows the update of either the compute configuration, the deployed model, the route, or any combination.\nAll arguments are optional but at least one must be...",
+        "parameters": [
+          "name",
+          "accelerator",
+          "instance_size",
+          "instance_type",
+          "min_replica",
+          "max_replica",
+          "scale_to_zero_timeout",
+          "repository",
+          "framework",
+          "revision",
+          "task",
+          "custom_image",
+          "env",
+          "secrets",
+          "domain",
+          "path",
+          "cache_http_responses",
+          "tags",
+          "namespace",
+          "token"
+        ]
+      },
+      {
+        "name": "update_webhook",
+        "signature": "(webhook_id: 'str', *, url: 'Optional[str]' = None, watched: 'Optional[List[Union[Dict, WebhookWatchedItem]]]' = None, domains: 'Optional[List[constants.WEBHOOK_DOMAIN_T]]' = None, secret: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'WebhookInfo'",
+        "doc": "Update an existing webhook.\n\nArgs:\n    webhook_id (`str`):\n        The unique identifier of the webhook to be updated.\n    url (`str`, optional):\n        The URL to which the payload will be sent.\n   ...",
+        "parameters": [
+          "webhook_id",
+          "url",
+          "watched",
+          "domains",
+          "secret",
+          "token"
+        ]
+      }
+    ]
+  },
+  "all_methods": [
+    {
+      "name": "accept_access_request",
+      "signature": "(repo_id: 'str', user: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Accept an access request from a user for a given gated repo.\n\nOnce the request is accepted, the user will be able to download any file of the repo and access the community\ntab. If the approval mode is...",
+      "parameters": [
+        "repo_id",
+        "user",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "add_collection_item",
+      "signature": "(collection_slug: 'str', item_id: 'str', item_type: 'CollectionItemType_T', *, note: 'Optional[str]' = None, exists_ok: 'bool' = False, token: 'Union[bool, str, None]' = None) -> 'Collection'",
+      "doc": "Add an item to a collection on the Hub.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection to update. Example: `\"TheBloke/recent-models-64f9a55bb3115b4f513ec026\"`.\n    item_id (`str`):...",
+      "parameters": [
+        "collection_slug",
+        "item_id",
+        "item_type",
+        "note",
+        "exists_ok",
+        "token"
+      ]
+    },
+    {
+      "name": "add_space_secret",
+      "signature": "(repo_id: 'str', key: 'str', value: 'str', *, description: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Adds or updates a secret in a Space.\n\nSecrets allow to set secret keys or tokens to a Space without hardcoding them.\nFor more details, see https://huggingface.co/docs/hub/spaces-overview#managing-secr...",
+      "parameters": [
+        "repo_id",
+        "key",
+        "value",
+        "description",
+        "token"
+      ]
+    },
+    {
+      "name": "add_space_variable",
+      "signature": "(repo_id: 'str', key: 'str', value: 'str', *, description: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Dict[str, SpaceVariable]'",
+      "doc": "Adds or updates a variable in a Space.\n\nVariables allow to set environment variables to a Space without hardcoding them.\nFor more details, see https://huggingface.co/docs/hub/spaces-overview#managing-...",
+      "parameters": [
+        "repo_id",
+        "key",
+        "value",
+        "description",
+        "token"
+      ]
+    },
+    {
+      "name": "auth_check",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Check if the provided user token has access to a specific repository on the Hugging Face Hub.\n\nThis method verifies whether the user, authenticated via the provided token, has access to the specified\n...",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "cancel_access_request",
+      "signature": "(repo_id: 'str', user: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Cancel an access request from a user for a given gated repo.\n\nA cancelled request will go back to the pending list and the user will lose access to the repo.\n\nFor more info about gated repos, see http...",
+      "parameters": [
+        "repo_id",
+        "user",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "cancel_job",
+      "signature": "(*, job_id: 'str', namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Cancel a compute Job on Hugging Face infrastructure.\n\nArgs:\n    job_id (`str`):\n        ID of the Job.\n\n    namespace (`str`, *optional*):\n        The namespace where the Job is running. Defaults to t...",
+      "parameters": [
+        "job_id",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "change_discussion_status",
+      "signature": "(repo_id: 'str', discussion_num: 'int', new_status: \"Literal['open', 'closed']\", *, token: 'Union[bool, str, None]' = None, comment: 'Optional[str]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionStatusChange'",
+      "doc": "Closes or re-opens a Discussion or Pull Request.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num (`int`):\n     ...",
+      "parameters": [
+        "repo_id",
+        "discussion_num",
+        "new_status",
+        "token",
+        "comment",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "comment_discussion",
+      "signature": "(repo_id: 'str', discussion_num: 'int', comment: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionComment'",
+      "doc": "Creates a new comment on the given Discussion.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num (`int`):\n       ...",
+      "parameters": [
+        "repo_id",
+        "discussion_num",
+        "comment",
+        "token",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "create_branch",
+      "signature": "(repo_id: 'str', *, branch: 'str', revision: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None, exist_ok: 'bool' = False) -> 'None'",
+      "doc": "Create a new branch for a repo on the Hub, starting from the specified revision (defaults to `main`).\nTo find a revision suiting your needs, you can use [`list_repo_refs`] or [`list_repo_commits`].\n\nA...",
+      "parameters": [
+        "repo_id",
+        "branch",
+        "revision",
+        "token",
+        "repo_type",
+        "exist_ok"
+      ]
+    },
+    {
+      "name": "create_collection",
+      "signature": "(title: 'str', *, namespace: 'Optional[str]' = None, description: 'Optional[str]' = None, private: 'bool' = False, exists_ok: 'bool' = False, token: 'Union[bool, str, None]' = None) -> 'Collection'",
+      "doc": "Create a new Collection on the Hub.\n\nArgs:\n    title (`str`):\n        Title of the collection to create. Example: `\"Recent models\"`.\n    namespace (`str`, *optional*):\n        Namespace of the collect...",
+      "parameters": [
+        "title",
+        "namespace",
+        "description",
+        "private",
+        "exists_ok",
+        "token"
+      ]
+    },
+    {
+      "name": "create_commit",
+      "signature": "(repo_id: 'str', operations: 'Iterable[CommitOperation]', *, commit_message: 'str', commit_description: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, num_threads: 'int' = 5, parent_commit: 'Optional[str]' = None, run_as_future: 'bool' = False) -> 'Union[CommitInfo, Future[CommitInfo]]'",
+      "doc": "Creates a commit in the given repo, deleting & uploading files as needed.\n\n<Tip warning={true}>\n\nThe input list of `CommitOperation` will be mutated during the commit process. Do not reuse the same ob...",
+      "parameters": [
+        "repo_id",
+        "operations",
+        "commit_message",
+        "commit_description",
+        "token",
+        "repo_type",
+        "revision",
+        "create_pr",
+        "num_threads",
+        "parent_commit",
+        "run_as_future"
+      ]
+    },
+    {
+      "name": "create_discussion",
+      "signature": "(repo_id: 'str', title: 'str', *, token: 'Union[bool, str, None]' = None, description: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, pull_request: 'bool' = False) -> 'DiscussionWithDetails'",
+      "doc": "Creates a Discussion or Pull Request.\n\nPull Requests created programmatically will be in `\"draft\"` status.\n\nCreating a Pull Request with changes can also be done at once with [`HfApi.create_commit`].\n...",
+      "parameters": [
+        "repo_id",
+        "title",
+        "token",
+        "description",
+        "repo_type",
+        "pull_request"
+      ]
+    },
+    {
+      "name": "create_inference_endpoint",
+      "signature": "(name: 'str', *, repository: 'str', framework: 'str', accelerator: 'str', instance_size: 'str', instance_type: 'str', region: 'str', vendor: 'str', account_id: 'Optional[str]' = None, min_replica: 'int' = 1, max_replica: 'int' = 1, scale_to_zero_timeout: 'Optional[int]' = None, revision: 'Optional[str]' = None, task: 'Optional[str]' = None, custom_image: 'Optional[Dict]' = None, env: 'Optional[Dict[str, str]]' = None, secrets: 'Optional[Dict[str, str]]' = None, type: 'InferenceEndpointType' = <InferenceEndpointType.PROTECTED: 'protected'>, domain: 'Optional[str]' = None, path: 'Optional[str]' = None, cache_http_responses: 'Optional[bool]' = None, tags: 'Optional[List[str]]' = None, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+      "doc": "Create a new Inference Endpoint.\n\nArgs:\n    name (`str`):\n        The unique name for the new Inference Endpoint.\n    repository (`str`):\n        The name of the model repository associated with the I...",
+      "parameters": [
+        "name",
+        "repository",
+        "framework",
+        "accelerator",
+        "instance_size",
+        "instance_type",
+        "region",
+        "vendor",
+        "account_id",
+        "min_replica",
+        "max_replica",
+        "scale_to_zero_timeout",
+        "revision",
+        "task",
+        "custom_image",
+        "env",
+        "secrets",
+        "type",
+        "domain",
+        "path",
+        "cache_http_responses",
+        "tags",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "create_inference_endpoint_from_catalog",
+      "signature": "(repo_id: 'str', *, name: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None, namespace: 'Optional[str]' = None) -> 'InferenceEndpoint'",
+      "doc": "Create a new Inference Endpoint from a model in the Hugging Face Inference Catalog.\n\nThe goal of the Inference Catalog is to provide a curated list of models that are optimized for inference\nand for w...",
+      "parameters": [
+        "repo_id",
+        "name",
+        "token",
+        "namespace"
+      ]
+    },
+    {
+      "name": "create_pull_request",
+      "signature": "(repo_id: 'str', title: 'str', *, token: 'Union[bool, str, None]' = None, description: 'Optional[str]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionWithDetails'",
+      "doc": "Creates a Pull Request . Pull Requests created programmatically will be in `\"draft\"` status.\n\nCreating a Pull Request with changes can also be done at once with [`HfApi.create_commit`];\n\nThis is a wra...",
+      "parameters": [
+        "repo_id",
+        "title",
+        "token",
+        "description",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "create_repo",
+      "signature": "(repo_id: 'str', *, token: 'Union[str, bool, None]' = None, private: 'Optional[bool]' = None, repo_type: 'Optional[str]' = None, exist_ok: 'bool' = False, resource_group_id: 'Optional[str]' = None, space_sdk: 'Optional[str]' = None, space_hardware: 'Optional[SpaceHardware]' = None, space_storage: 'Optional[SpaceStorage]' = None, space_sleep_time: 'Optional[int]' = None, space_secrets: 'Optional[List[Dict[str, str]]]' = None, space_variables: 'Optional[List[Dict[str, str]]]' = None) -> 'RepoUrl'",
+      "doc": "Create an empty repo on the HuggingFace Hub.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    token (Union[bool, str, None], op...",
+      "parameters": [
+        "repo_id",
+        "token",
+        "private",
+        "repo_type",
+        "exist_ok",
+        "resource_group_id",
+        "space_sdk",
+        "space_hardware",
+        "space_storage",
+        "space_sleep_time",
+        "space_secrets",
+        "space_variables"
+      ]
+    },
+    {
+      "name": "create_tag",
+      "signature": "(repo_id: 'str', *, tag: 'str', tag_message: 'Optional[str]' = None, revision: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None, exist_ok: 'bool' = False) -> 'None'",
+      "doc": "Tag a given commit of a repo on the Hub.\n\nArgs:\n    repo_id (`str`):\n        The repository in which a commit will be tagged.\n        Example: `\"user/my-cool-model\"`.\n\n    tag (`str`):\n        The nam...",
+      "parameters": [
+        "repo_id",
+        "tag",
+        "tag_message",
+        "revision",
+        "token",
+        "repo_type",
+        "exist_ok"
+      ]
+    },
+    {
+      "name": "create_webhook",
+      "signature": "(*, url: 'str', watched: 'List[Union[Dict, WebhookWatchedItem]]', domains: 'Optional[List[constants.WEBHOOK_DOMAIN_T]]' = None, secret: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'WebhookInfo'",
+      "doc": "Create a new webhook.\n\nArgs:\n    url (`str`):\n        URL to send the payload to.\n    watched (`List[WebhookWatchedItem]`):\n        List of [`WebhookWatchedItem`] to be watched by the webhook. It can ...",
+      "parameters": [
+        "url",
+        "watched",
+        "domains",
+        "secret",
+        "token"
+      ]
+    },
+    {
+      "name": "dataset_info",
+      "signature": "(repo_id: 'str', *, revision: 'Optional[str]' = None, timeout: 'Optional[float]' = None, files_metadata: 'bool' = False, expand: 'Optional[List[ExpandDatasetProperty_T]]' = None, token: 'Union[bool, str, None]' = None) -> 'DatasetInfo'",
+      "doc": "Get info on one specific dataset on huggingface.co.\n\nDataset can be private if you pass an acceptable token.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name s...",
+      "parameters": [
+        "repo_id",
+        "revision",
+        "timeout",
+        "files_metadata",
+        "expand",
+        "token"
+      ]
+    },
+    {
+      "name": "delete_branch",
+      "signature": "(repo_id: 'str', *, branch: 'str', token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'None'",
+      "doc": "Delete a branch from a repo on the Hub.\n\nArgs:\n    repo_id (`str`):\n        The repository in which a branch will be deleted.\n        Example: `\"user/my-cool-model\"`.\n\n    branch (`str`):\n        The ...",
+      "parameters": [
+        "repo_id",
+        "branch",
+        "token",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "delete_collection",
+      "signature": "(collection_slug: 'str', *, missing_ok: 'bool' = False, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Delete a collection on the Hub.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection to delete. Example: `\"TheBloke/recent-models-64f9a55bb3115b4f513ec026\"`.\n    missing_ok (`bool`, *opt...",
+      "parameters": [
+        "collection_slug",
+        "missing_ok",
+        "token"
+      ]
+    },
+    {
+      "name": "delete_collection_item",
+      "signature": "(collection_slug: 'str', item_object_id: 'str', *, missing_ok: 'bool' = False, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Delete an item from a collection.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection to update. Example: `\"TheBloke/recent-models-64f9a55bb3115b4f513ec026\"`.\n    item_object_id (`str`)...",
+      "parameters": [
+        "collection_slug",
+        "item_object_id",
+        "missing_ok",
+        "token"
+      ]
+    },
+    {
+      "name": "delete_file",
+      "signature": "(path_in_repo: 'str', repo_id: 'str', *, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, commit_description: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, parent_commit: 'Optional[str]' = None) -> 'CommitInfo'",
+      "doc": "Deletes a file in the given repo.\n\nArgs:\n    path_in_repo (`str`):\n        Relative filepath in the repo, for example:\n        `\"checkpoints/1fec34a/weights.bin\"`\n    repo_id (`str`):\n        The repo...",
+      "parameters": [
+        "path_in_repo",
+        "repo_id",
+        "token",
+        "repo_type",
+        "revision",
+        "commit_message",
+        "commit_description",
+        "create_pr",
+        "parent_commit"
+      ]
+    },
+    {
+      "name": "delete_files",
+      "signature": "(repo_id: 'str', delete_patterns: 'List[str]', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, commit_description: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, parent_commit: 'Optional[str]' = None) -> 'CommitInfo'",
+      "doc": "Delete files from a repository on the Hub.\n\nIf a folder path is provided, the entire folder is deleted as well as\nall files it contained.\n\nArgs:\n    repo_id (`str`):\n        The repository from which ...",
+      "parameters": [
+        "repo_id",
+        "delete_patterns",
+        "token",
+        "repo_type",
+        "revision",
+        "commit_message",
+        "commit_description",
+        "create_pr",
+        "parent_commit"
+      ]
+    },
+    {
+      "name": "delete_folder",
+      "signature": "(path_in_repo: 'str', repo_id: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, commit_description: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, parent_commit: 'Optional[str]' = None) -> 'CommitInfo'",
+      "doc": "Deletes a folder in the given repo.\n\nSimple wrapper around [`create_commit`] method.\n\nArgs:\n    path_in_repo (`str`):\n        Relative folder path in the repo, for example: `\"checkpoints/1fec34a\"`.\n  ...",
+      "parameters": [
+        "path_in_repo",
+        "repo_id",
+        "token",
+        "repo_type",
+        "revision",
+        "commit_message",
+        "commit_description",
+        "create_pr",
+        "parent_commit"
+      ]
+    },
+    {
+      "name": "delete_inference_endpoint",
+      "signature": "(name: 'str', *, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Delete an Inference Endpoint.\n\nThis operation is not reversible. If you don't want to be charged for an Inference Endpoint, it is preferable\nto pause it with [`pause_inference_endpoint`] or scale it t...",
+      "parameters": [
+        "name",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "delete_repo",
+      "signature": "(repo_id: 'str', *, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, missing_ok: 'bool' = False) -> 'None'",
+      "doc": "Delete a repo from the HuggingFace Hub. CAUTION: this is irreversible.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    token (...",
+      "parameters": [
+        "repo_id",
+        "token",
+        "repo_type",
+        "missing_ok"
+      ]
+    },
+    {
+      "name": "delete_space_secret",
+      "signature": "(repo_id: 'str', key: 'str', *, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Deletes a secret from a Space.\n\nSecrets allow to set secret keys or tokens to a Space without hardcoding them.\nFor more details, see https://huggingface.co/docs/hub/spaces-overview#managing-secrets.\n\n...",
+      "parameters": [
+        "repo_id",
+        "key",
+        "token"
+      ]
+    },
+    {
+      "name": "delete_space_storage",
+      "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'SpaceRuntime'",
+      "doc": "Delete persistent storage for a Space.\n\nArgs:\n    repo_id (`str`):\n        ID of the Space to update. Example: `\"open-llm-leaderboard/open_llm_leaderboard\"`.\n    token (Union[bool, str, None], optiona...",
+      "parameters": [
+        "repo_id",
+        "token"
+      ]
+    },
+    {
+      "name": "delete_space_variable",
+      "signature": "(repo_id: 'str', key: 'str', *, token: 'Union[bool, str, None]' = None) -> 'Dict[str, SpaceVariable]'",
+      "doc": "Deletes a variable from a Space.\n\nVariables allow to set environment variables to a Space without hardcoding them.\nFor more details, see https://huggingface.co/docs/hub/spaces-overview#managing-secret...",
+      "parameters": [
+        "repo_id",
+        "key",
+        "token"
+      ]
+    },
+    {
+      "name": "delete_tag",
+      "signature": "(repo_id: 'str', *, tag: 'str', token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'None'",
+      "doc": "Delete a tag from a repo on the Hub.\n\nArgs:\n    repo_id (`str`):\n        The repository in which a tag will be deleted.\n        Example: `\"user/my-cool-model\"`.\n\n    tag (`str`):\n        The name of t...",
+      "parameters": [
+        "repo_id",
+        "tag",
+        "token",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "delete_webhook",
+      "signature": "(webhook_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Delete a webhook.\n\nArgs:\n    webhook_id (`str`):\n        The unique identifier of the webhook to delete.\n    token (Union[bool, str, None], optional):\n        A valid user access token (string). Defau...",
+      "parameters": [
+        "webhook_id",
+        "token"
+      ]
+    },
+    {
+      "name": "disable_webhook",
+      "signature": "(webhook_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'WebhookInfo'",
+      "doc": "Disable a webhook (makes it \"disabled\").\n\nArgs:\n    webhook_id (`str`):\n        The unique identifier of the webhook to disable.\n    token (Union[bool, str, None], optional):\n        A valid user acce...",
+      "parameters": [
+        "webhook_id",
+        "token"
+      ]
+    },
+    {
+      "name": "duplicate_space",
+      "signature": "(from_id: 'str', to_id: 'Optional[str]' = None, *, private: 'Optional[bool]' = None, token: 'Union[bool, str, None]' = None, exist_ok: 'bool' = False, hardware: 'Optional[SpaceHardware]' = None, storage: 'Optional[SpaceStorage]' = None, sleep_time: 'Optional[int]' = None, secrets: 'Optional[List[Dict[str, str]]]' = None, variables: 'Optional[List[Dict[str, str]]]' = None) -> 'RepoUrl'",
+      "doc": "Duplicate a Space.\n\nProgrammatically duplicate a Space. The new Space will be created in your account and will be in the same state\nas the original Space (running or paused). You can duplicate a Space...",
+      "parameters": [
+        "from_id",
+        "to_id",
+        "private",
+        "token",
+        "exist_ok",
+        "hardware",
+        "storage",
+        "sleep_time",
+        "secrets",
+        "variables"
+      ]
+    },
+    {
+      "name": "edit_discussion_comment",
+      "signature": "(repo_id: 'str', discussion_num: 'int', comment_id: 'str', new_content: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionComment'",
+      "doc": "Edits a comment on a Discussion / Pull Request.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num (`int`):\n      ...",
+      "parameters": [
+        "repo_id",
+        "discussion_num",
+        "comment_id",
+        "new_content",
+        "token",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "enable_webhook",
+      "signature": "(webhook_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'WebhookInfo'",
+      "doc": "Enable a webhook (makes it \"active\").\n\nArgs:\n    webhook_id (`str`):\n        The unique identifier of the webhook to enable.\n    token (Union[bool, str, None], optional):\n        A valid user access t...",
+      "parameters": [
+        "webhook_id",
+        "token"
+      ]
+    },
+    {
+      "name": "fetch_job_logs",
+      "signature": "(*, job_id: 'str', namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[str]'",
+      "doc": "Fetch all the logs from a compute Job on Hugging Face infrastructure.\n\nArgs:\n    job_id (`str`):\n        ID of the Job.\n\n    namespace (`str`, *optional*):\n        The namespace where the Job is runni...",
+      "parameters": [
+        "job_id",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "file_exists",
+      "signature": "(repo_id: 'str', filename: 'str', *, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'bool'",
+      "doc": "Checks if a file exists in a repository on the Hugging Face Hub.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    filename (`st...",
+      "parameters": [
+        "repo_id",
+        "filename",
+        "repo_type",
+        "revision",
+        "token"
+      ]
+    },
+    {
+      "name": "get_collection",
+      "signature": "(collection_slug: 'str', *, token: 'Union[bool, str, None]' = None) -> 'Collection'",
+      "doc": "Gets information about a Collection on the Hub.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection of the Hub. Example: `\"TheBloke/recent-models-64f9a55bb3115b4f513ec026\"`.\n    token (...",
+      "parameters": [
+        "collection_slug",
+        "token"
+      ]
+    },
+    {
+      "name": "get_dataset_tags",
+      "signature": "() -> 'Dict'",
+      "doc": "List all valid dataset tags as a nested namespace object.",
+      "parameters": []
+    },
+    {
+      "name": "get_discussion_details",
+      "signature": "(repo_id: 'str', discussion_num: 'int', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'DiscussionWithDetails'",
+      "doc": "Fetches a Discussion's / Pull Request 's details from the Hub.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num ...",
+      "parameters": [
+        "repo_id",
+        "discussion_num",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "get_full_repo_name",
+      "signature": "(model_id: 'str', *, organization: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None)",
+      "doc": "Returns the repository name for a given model ID and optional\norganization.\n\nArgs:\n    model_id (`str`):\n        The name of the model.\n    organization (`str`, *optional*):\n        If passed, the rep...",
+      "parameters": [
+        "model_id",
+        "organization",
+        "token"
+      ]
+    },
+    {
+      "name": "get_hf_file_metadata",
+      "signature": "(*, url: 'str', token: 'Union[bool, str, None]' = None, proxies: 'Optional[Dict]' = None, timeout: 'Optional[float]' = 10) -> 'HfFileMetadata'",
+      "doc": "Fetch metadata of a file versioned on the Hub for a given url.\n\nArgs:\n    url (`str`):\n        File url, for example returned by [`hf_hub_url`].\n    token (Union[bool, str, None], optional):\n        A...",
+      "parameters": [
+        "url",
+        "token",
+        "proxies",
+        "timeout"
+      ]
+    },
+    {
+      "name": "get_inference_endpoint",
+      "signature": "(name: 'str', *, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+      "doc": "Get information about an Inference Endpoint.\n\nArgs:\n    name (`str`):\n        The name of the Inference Endpoint to retrieve information about.\n    namespace (`str`, *optional*):\n        The namespace...",
+      "parameters": [
+        "name",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "get_model_tags",
+      "signature": "() -> 'Dict'",
+      "doc": "List all valid model tags as a nested namespace object",
+      "parameters": []
+    },
+    {
+      "name": "get_paths_info",
+      "signature": "(repo_id: 'str', paths: 'Union[List[str], str]', *, expand: 'bool' = False, revision: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'List[Union[RepoFile, RepoFolder]]'",
+      "doc": "Get information about a repo's paths.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated by a `/`.\n    paths (`Union[List[str], str]`, *optional*):\n   ...",
+      "parameters": [
+        "repo_id",
+        "paths",
+        "expand",
+        "revision",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "get_repo_discussions",
+      "signature": "(repo_id: 'str', *, author: 'Optional[str]' = None, discussion_type: 'Optional[constants.DiscussionTypeFilter]' = None, discussion_status: 'Optional[constants.DiscussionStatusFilter]' = None, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterator[Discussion]'",
+      "doc": "Fetches Discussions and Pull Requests for the given repo.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    author (`str`, *opti...",
+      "parameters": [
+        "repo_id",
+        "author",
+        "discussion_type",
+        "discussion_status",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "get_safetensors_metadata",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'SafetensorsRepoMetadata'",
+      "doc": "Parse metadata for a safetensors repo on the Hub.\n\nWe first check if the repo has a single safetensors file or a sharded safetensors repo. If it's a single\nsafetensors file, we parse the metadata from...",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "revision",
+        "token"
+      ]
+    },
+    {
+      "name": "get_space_runtime",
+      "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'SpaceRuntime'",
+      "doc": "Gets runtime information about a Space.\n\nArgs:\n    repo_id (`str`):\n        ID of the repo to update. Example: `\"bigcode/in-the-stack\"`.\n    token (Union[bool, str, None], optional):\n        A valid u...",
+      "parameters": [
+        "repo_id",
+        "token"
+      ]
+    },
+    {
+      "name": "get_space_variables",
+      "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'Dict[str, SpaceVariable]'",
+      "doc": "Gets all variables from a Space.\n\nVariables allow to set environment variables to a Space without hardcoding them.\nFor more details, see https://huggingface.co/docs/hub/spaces-overview#managing-secret...",
+      "parameters": [
+        "repo_id",
+        "token"
+      ]
+    },
+    {
+      "name": "get_token_permission",
+      "signature": "(token: 'Union[bool, str, None]' = None) -> \"Literal['read', 'write', 'fineGrained', None]\"",
+      "doc": "Check if a given `token` is valid and return its permissions.\n\n<Tip warning={true}>\n\nThis method is deprecated and will be removed in version 1.0. Permissions are more complex than when\n`get_token_per...",
+      "parameters": [
+        "token"
+      ]
+    },
+    {
+      "name": "get_user_overview",
+      "signature": "(username: 'str', token: 'Union[bool, str, None]' = None) -> 'User'",
+      "doc": "Get an overview of a user on the Hub.\n\nArgs:\n    username (`str`):\n        Username of the user to get an overview of.\n    token (Union[bool, str, None], optional):\n        A valid user access token (...",
+      "parameters": [
+        "username",
+        "token"
+      ]
+    },
+    {
+      "name": "get_webhook",
+      "signature": "(webhook_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'WebhookInfo'",
+      "doc": "Get a webhook by its id.\n\nArgs:\n    webhook_id (`str`):\n        The unique identifier of the webhook to get.\n    token (Union[bool, str, None], optional):\n        A valid user access token (string). D...",
+      "parameters": [
+        "webhook_id",
+        "token"
+      ]
+    },
+    {
+      "name": "grant_access",
+      "signature": "(repo_id: 'str', user: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Grant access to a user for a given gated repo.\n\nGranting access don't require for the user to send an access request by themselves. The user is automatically\nadded to the accepted list meaning they ca...",
+      "parameters": [
+        "repo_id",
+        "user",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "hf_hub_download",
+      "signature": "(repo_id: 'str', filename: 'str', *, subfolder: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, cache_dir: 'Union[str, Path, None]' = None, local_dir: 'Union[str, Path, None]' = None, force_download: 'bool' = False, proxies: 'Optional[Dict]' = None, etag_timeout: 'float' = 10, token: 'Union[bool, str, None]' = None, local_files_only: 'bool' = False, resume_download: 'Optional[bool]' = None, force_filename: 'Optional[str]' = None, local_dir_use_symlinks: \"Union[bool, Literal['auto']]\" = 'auto') -> 'str'",
+      "doc": "Download a given file if it's not already present in the local cache.\n\nThe new cache file layout looks like this:\n- The cache directory contains one subfolder per repo_id (namespaced by repo type)\n- i...",
+      "parameters": [
+        "repo_id",
+        "filename",
+        "subfolder",
+        "repo_type",
+        "revision",
+        "cache_dir",
+        "local_dir",
+        "force_download",
+        "proxies",
+        "etag_timeout",
+        "token",
+        "local_files_only",
+        "resume_download",
+        "force_filename",
+        "local_dir_use_symlinks"
+      ]
+    },
+    {
+      "name": "hide_discussion_comment",
+      "signature": "(repo_id: 'str', discussion_num: 'int', comment_id: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionComment'",
+      "doc": "Hides a comment on a Discussion / Pull Request.\n\n<Tip warning={true}>\nHidden comments' content cannot be retrieved anymore. Hiding a comment is irreversible.\n</Tip>\n\nArgs:\n    repo_id (`str`):\n       ...",
+      "parameters": [
+        "repo_id",
+        "discussion_num",
+        "comment_id",
+        "token",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "inspect_job",
+      "signature": "(*, job_id: 'str', namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'JobInfo'",
+      "doc": "Inspect a compute Job on Hugging Face infrastructure.\n\nArgs:\n    job_id (`str`):\n        ID of the Job.\n\n    namespace (`str`, *optional*):\n        The namespace where the Job is running. Defaults to ...",
+      "parameters": [
+        "job_id",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "list_accepted_access_requests",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'List[AccessRequest]'",
+      "doc": "Get accepted access requests for a given gated repo.\n\nAn accepted request means the user has requested access to the repo and the request has been accepted. The user\ncan download any file of the repo....",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "list_collections",
+      "signature": "(*, owner: 'Union[List[str], str, None]' = None, item: 'Union[List[str], str, None]' = None, sort: \"Optional[Literal['lastModified', 'trending', 'upvotes']]\" = None, limit: 'Optional[int]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[Collection]'",
+      "doc": "List collections on the Huggingface Hub, given some filters.\n\n<Tip warning={true}>\n\nWhen listing collections, the item list per collection is truncated to 4 items maximum. To retrieve all items\nfrom a...",
+      "parameters": [
+        "owner",
+        "item",
+        "sort",
+        "limit",
+        "token"
+      ]
+    },
+    {
+      "name": "list_datasets",
+      "signature": "(*, filter: 'Union[str, Iterable[str], None]' = None, author: 'Optional[str]' = None, benchmark: 'Optional[Union[str, List[str]]]' = None, dataset_name: 'Optional[str]' = None, gated: 'Optional[bool]' = None, language_creators: 'Optional[Union[str, List[str]]]' = None, language: 'Optional[Union[str, List[str]]]' = None, multilinguality: 'Optional[Union[str, List[str]]]' = None, size_categories: 'Optional[Union[str, List[str]]]' = None, tags: 'Optional[Union[str, List[str]]]' = None, task_categories: 'Optional[Union[str, List[str]]]' = None, task_ids: 'Optional[Union[str, List[str]]]' = None, search: 'Optional[str]' = None, sort: \"Optional[Union[Literal['last_modified'], str]]\" = None, direction: 'Optional[Literal[-1]]' = None, limit: 'Optional[int]' = None, expand: 'Optional[List[ExpandDatasetProperty_T]]' = None, full: 'Optional[bool]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[DatasetInfo]'",
+      "doc": "List datasets hosted on the Huggingface Hub, given some filters.\n\nArgs:\n    filter (`str` or `Iterable[str]`, *optional*):\n        A string or list of string to filter datasets on the hub.\n    author ...",
+      "parameters": [
+        "filter",
+        "author",
+        "benchmark",
+        "dataset_name",
+        "gated",
+        "language_creators",
+        "language",
+        "multilinguality",
+        "size_categories",
+        "tags",
+        "task_categories",
+        "task_ids",
+        "search",
+        "sort",
+        "direction",
+        "limit",
+        "expand",
+        "full",
+        "token"
+      ]
+    },
+    {
+      "name": "list_inference_catalog",
+      "signature": "(*, token: 'Union[bool, str, None]' = None) -> 'List[str]'",
+      "doc": "List models available in the Hugging Face Inference Catalog.\n\nThe goal of the Inference Catalog is to provide a curated list of models that are optimized for inference\nand for which default configurat...",
+      "parameters": [
+        "token"
+      ]
+    },
+    {
+      "name": "list_inference_endpoints",
+      "signature": "(namespace: 'Optional[str]' = None, *, token: 'Union[bool, str, None]' = None) -> 'List[InferenceEndpoint]'",
+      "doc": "Lists all inference endpoints for the given namespace.\n\nArgs:\n    namespace (`str`, *optional*):\n        The namespace to list endpoints for. Defaults to the current user. Set to `\"*\"` to list all end...",
+      "parameters": [
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "list_jobs",
+      "signature": "(*, timeout: 'Optional[int]' = None, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'List[JobInfo]'",
+      "doc": "List compute Jobs on Hugging Face infrastructure.\n\nArgs:\n    timeout (`float`, *optional*):\n        Whether to set a timeout for the request to the Hub.\n\n    namespace (`str`, *optional*):\n        The...",
+      "parameters": [
+        "timeout",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "list_lfs_files",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[LFSFileInfo]'",
+      "doc": "List all LFS files in a repo on the Hub.\n\nThis is primarily useful to count how much storage a repo is using and to eventually clean up large files\nwith [`permanently_delete_lfs_files`]. Note that thi...",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "list_liked_repos",
+      "signature": "(user: 'Optional[str]' = None, *, token: 'Union[bool, str, None]' = None) -> 'UserLikes'",
+      "doc": "List all public repos liked by a user on huggingface.co.\n\nThis list is public so token is optional. If `user` is not passed, it defaults to\nthe logged in user.\n\nSee also [`unlike`].\n\nArgs:\n    user (`...",
+      "parameters": [
+        "user",
+        "token"
+      ]
+    },
+    {
+      "name": "list_models",
+      "signature": "(*, filter: 'Union[str, Iterable[str], None]' = None, author: 'Optional[str]' = None, gated: 'Optional[bool]' = None, inference: \"Optional[Literal['warm']]\" = None, inference_provider: \"Optional[Union[Literal['all'], 'PROVIDER_T', List['PROVIDER_T']]]\" = None, library: 'Optional[Union[str, List[str]]]' = None, language: 'Optional[Union[str, List[str]]]' = None, model_name: 'Optional[str]' = None, task: 'Optional[Union[str, List[str]]]' = None, trained_dataset: 'Optional[Union[str, List[str]]]' = None, tags: 'Optional[Union[str, List[str]]]' = None, search: 'Optional[str]' = None, pipeline_tag: 'Optional[str]' = None, emissions_thresholds: 'Optional[Tuple[float, float]]' = None, sort: \"Union[Literal['last_modified'], str, None]\" = None, direction: 'Optional[Literal[-1]]' = None, limit: 'Optional[int]' = None, expand: 'Optional[List[ExpandModelProperty_T]]' = None, full: 'Optional[bool]' = None, cardData: 'bool' = False, fetch_config: 'bool' = False, token: 'Union[bool, str, None]' = None) -> 'Iterable[ModelInfo]'",
+      "doc": "List models hosted on the Huggingface Hub, given some filters.\n\nArgs:\n    filter (`str` or `Iterable[str]`, *optional*):\n        A string or list of string to filter models on the Hub.\n    author (`st...",
+      "parameters": [
+        "filter",
+        "author",
+        "gated",
+        "inference",
+        "inference_provider",
+        "library",
+        "language",
+        "model_name",
+        "task",
+        "trained_dataset",
+        "tags",
+        "search",
+        "pipeline_tag",
+        "emissions_thresholds",
+        "sort",
+        "direction",
+        "limit",
+        "expand",
+        "full",
+        "cardData",
+        "fetch_config",
+        "token"
+      ]
+    },
+    {
+      "name": "list_organization_members",
+      "signature": "(organization: 'str', token: 'Union[bool, str, None]' = None) -> 'Iterable[User]'",
+      "doc": "List of members of an organization on the Hub.\n\nArgs:\n    organization (`str`):\n        Name of the organization to get the members of.\n    token (Union[bool, str, None], optional):\n        A valid us...",
+      "parameters": [
+        "organization",
+        "token"
+      ]
+    },
+    {
+      "name": "list_papers",
+      "signature": "(*, query: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[PaperInfo]'",
+      "doc": "List daily papers on the Hugging Face Hub given a search query.\n\nArgs:\n    query (`str`, *optional*):\n        A search query string to find papers.\n        If provided, returns papers that match the q...",
+      "parameters": [
+        "query",
+        "token"
+      ]
+    },
+    {
+      "name": "list_pending_access_requests",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'List[AccessRequest]'",
+      "doc": "Get pending access requests for a given gated repo.\n\nA pending request means the user has requested access to the repo but the request has not been processed yet.\nIf the approval mode is automatic, th...",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "list_rejected_access_requests",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'List[AccessRequest]'",
+      "doc": "Get rejected access requests for a given gated repo.\n\nA rejected request means the user has requested access to the repo and the request has been explicitly rejected\nby a repo owner (either you or ano...",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "list_repo_commits",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None, revision: 'Optional[str]' = None, formatted: 'bool' = False) -> 'List[GitCommitInfo]'",
+      "doc": "Get the list of commits of a given revision for a repo on the Hub.\n\nCommits are sorted by date (last commit first).\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo...",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "token",
+        "revision",
+        "formatted"
+      ]
+    },
+    {
+      "name": "list_repo_files",
+      "signature": "(repo_id: 'str', *, revision: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'List[str]'",
+      "doc": "Get the list of files in a given repo.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated by a `/`.\n    revision (`str`, *optional*):\n        The revis...",
+      "parameters": [
+        "repo_id",
+        "revision",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "list_repo_likers",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[User]'",
+      "doc": "List all users who liked a given repo on the hugging Face Hub.\n\nSee also [`list_liked_repos`].\n\nArgs:\n    repo_id (`str`):\n        The repository to retrieve . Example: `\"user/my-cool-model\"`.\n\n    to...",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "list_repo_refs",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, include_pull_requests: 'bool' = False, token: 'Union[str, bool, None]' = None) -> 'GitRefs'",
+      "doc": "Get the list of refs of a given repo (both tags and branches).\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    repo_type (`str...",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "include_pull_requests",
+        "token"
+      ]
+    },
+    {
+      "name": "list_repo_tree",
+      "signature": "(repo_id: 'str', path_in_repo: 'Optional[str]' = None, *, recursive: 'bool' = False, expand: 'bool' = False, revision: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'Iterable[Union[RepoFile, RepoFolder]]'",
+      "doc": "List a repo tree's files and folders and get information about them.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated by a `/`.\n    path_in_repo (`st...",
+      "parameters": [
+        "repo_id",
+        "path_in_repo",
+        "recursive",
+        "expand",
+        "revision",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "list_spaces",
+      "signature": "(*, filter: 'Union[str, Iterable[str], None]' = None, author: 'Optional[str]' = None, search: 'Optional[str]' = None, datasets: 'Union[str, Iterable[str], None]' = None, models: 'Union[str, Iterable[str], None]' = None, linked: 'bool' = False, sort: \"Union[Literal['last_modified'], str, None]\" = None, direction: 'Optional[Literal[-1]]' = None, limit: 'Optional[int]' = None, expand: 'Optional[List[ExpandSpaceProperty_T]]' = None, full: 'Optional[bool]' = None, token: 'Union[bool, str, None]' = None) -> 'Iterable[SpaceInfo]'",
+      "doc": "List spaces hosted on the Huggingface Hub, given some filters.\n\nArgs:\n    filter (`str` or `Iterable`, *optional*):\n        A string tag or list of tags that can be used to identify Spaces on the Hub....",
+      "parameters": [
+        "filter",
+        "author",
+        "search",
+        "datasets",
+        "models",
+        "linked",
+        "sort",
+        "direction",
+        "limit",
+        "expand",
+        "full",
+        "token"
+      ]
+    },
+    {
+      "name": "list_user_followers",
+      "signature": "(username: 'str', token: 'Union[bool, str, None]' = None) -> 'Iterable[User]'",
+      "doc": "Get the list of followers of a user on the Hub.\n\nArgs:\n    username (`str`):\n        Username of the user to get the followers of.\n    token (Union[bool, str, None], optional):\n        A valid user ac...",
+      "parameters": [
+        "username",
+        "token"
+      ]
+    },
+    {
+      "name": "list_user_following",
+      "signature": "(username: 'str', token: 'Union[bool, str, None]' = None) -> 'Iterable[User]'",
+      "doc": "Get the list of users followed by a user on the Hub.\n\nArgs:\n    username (`str`):\n        Username of the user to get the users followed by.\n    token (Union[bool, str, None], optional):\n        A val...",
+      "parameters": [
+        "username",
+        "token"
+      ]
+    },
+    {
+      "name": "list_webhooks",
+      "signature": "(*, token: 'Union[bool, str, None]' = None) -> 'List[WebhookInfo]'",
+      "doc": "List all configured webhooks.\n\nArgs:\n    token (Union[bool, str, None], optional):\n        A valid user access token (string). Defaults to the locally saved token, which is the recommended\n        met...",
+      "parameters": [
+        "token"
+      ]
+    },
+    {
+      "name": "merge_pull_request",
+      "signature": "(repo_id: 'str', discussion_num: 'int', *, token: 'Union[bool, str, None]' = None, comment: 'Optional[str]' = None, repo_type: 'Optional[str]' = None)",
+      "doc": "Merges a Pull Request.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num (`int`):\n        The number of the Discu...",
+      "parameters": [
+        "repo_id",
+        "discussion_num",
+        "token",
+        "comment",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "model_info",
+      "signature": "(repo_id: 'str', *, revision: 'Optional[str]' = None, timeout: 'Optional[float]' = None, securityStatus: 'Optional[bool]' = None, files_metadata: 'bool' = False, expand: 'Optional[List[ExpandModelProperty_T]]' = None, token: 'Union[bool, str, None]' = None) -> 'ModelInfo'",
+      "doc": "Get info on one specific model on huggingface.co\n\nModel can be private if you pass an acceptable token or are logged in.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a...",
+      "parameters": [
+        "repo_id",
+        "revision",
+        "timeout",
+        "securityStatus",
+        "files_metadata",
+        "expand",
+        "token"
+      ]
+    },
+    {
+      "name": "move_repo",
+      "signature": "(from_id: 'str', to_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None)",
+      "doc": "Moving a repository from namespace1/repo_name1 to namespace2/repo_name2\n\nNote there are certain limitations. For more information about moving\nrepositories, please see\nhttps://hf.co/docs/hub/repositor...",
+      "parameters": [
+        "from_id",
+        "to_id",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "paper_info",
+      "signature": "(id: 'str') -> 'PaperInfo'",
+      "doc": "Get information for a paper on the Hub.\n\nArgs:\n    id (`str`, **optional**):\n        ArXiv id of the paper.\n\nReturns:\n    `PaperInfo`: A `PaperInfo` object.\n\nRaises:\n    [`HTTPError`](https://requests...",
+      "parameters": [
+        "id"
+      ]
+    },
+    {
+      "name": "parse_safetensors_file_metadata",
+      "signature": "(repo_id: 'str', filename: 'str', *, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'SafetensorsFileMetadata'",
+      "doc": "Parse metadata from a safetensors file on the Hub.\n\nTo parse metadata from all safetensors files in a repo at once, use [`get_safetensors_metadata`].\n\nFor more details regarding the safetensors format...",
+      "parameters": [
+        "repo_id",
+        "filename",
+        "repo_type",
+        "revision",
+        "token"
+      ]
+    },
+    {
+      "name": "pause_inference_endpoint",
+      "signature": "(name: 'str', *, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+      "doc": "Pause an Inference Endpoint.\n\nA paused Inference Endpoint will not be charged. It can be resumed at any time using [`resume_inference_endpoint`].\nThis is different than scaling the Inference Endpoint ...",
+      "parameters": [
+        "name",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "pause_space",
+      "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None) -> 'SpaceRuntime'",
+      "doc": "Pause your Space.\n\nA paused Space stops executing until manually restarted by its owner. This is different from the sleeping\nstate in which free Spaces go after 48h of inactivity. Paused time is not b...",
+      "parameters": [
+        "repo_id",
+        "token"
+      ]
+    },
+    {
+      "name": "permanently_delete_lfs_files",
+      "signature": "(repo_id: 'str', lfs_files: 'Iterable[LFSFileInfo]', *, rewrite_history: 'bool' = True, repo_type: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Permanently delete LFS files from a repo on the Hub.\n\n<Tip warning={true}>\n\nThis is a permanent action that will affect all commits referencing the deleted files and might corrupt your\nrepository. Thi...",
+      "parameters": [
+        "repo_id",
+        "lfs_files",
+        "rewrite_history",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "preupload_lfs_files",
+      "signature": "(repo_id: 'str', additions: 'Iterable[CommitOperationAdd]', *, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, num_threads: 'int' = 5, free_memory: 'bool' = True, gitignore_content: 'Optional[str]' = None)",
+      "doc": "Pre-upload LFS files to S3 in preparation on a future commit.\n\nThis method is useful if you are generating the files to upload on-the-fly and you don't want to store them\nin memory before uploading th...",
+      "parameters": [
+        "repo_id",
+        "additions",
+        "token",
+        "repo_type",
+        "revision",
+        "create_pr",
+        "num_threads",
+        "free_memory",
+        "gitignore_content"
+      ]
+    },
+    {
+      "name": "reject_access_request",
+      "signature": "(repo_id: 'str', user: 'str', *, repo_type: 'Optional[str]' = None, rejection_reason: 'Optional[str]', token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Reject an access request from a user for a given gated repo.\n\nA rejected request will go to the rejected list. The user cannot download any file of the repo. Rejected\nrequests can be accepted or cance...",
+      "parameters": [
+        "repo_id",
+        "user",
+        "repo_type",
+        "rejection_reason",
+        "token"
+      ]
+    },
+    {
+      "name": "rename_discussion",
+      "signature": "(repo_id: 'str', discussion_num: 'int', new_title: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'DiscussionTitleChange'",
+      "doc": "Renames a Discussion.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    discussion_num (`int`):\n        The number of the Discus...",
+      "parameters": [
+        "repo_id",
+        "discussion_num",
+        "new_title",
+        "token",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "repo_exists",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'bool'",
+      "doc": "Checks if a repository exists on the Hugging Face Hub.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    repo_type (`str`, *opti...",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "repo_info",
+      "signature": "(repo_id: 'str', *, revision: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, timeout: 'Optional[float]' = None, files_metadata: 'bool' = False, expand: 'Optional[Union[ExpandModelProperty_T, ExpandDatasetProperty_T, ExpandSpaceProperty_T]]' = None, token: 'Union[bool, str, None]' = None) -> 'Union[ModelInfo, DatasetInfo, SpaceInfo]'",
+      "doc": "Get the info object for a given repo of a given type.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    revision (`str`, *option...",
+      "parameters": [
+        "repo_id",
+        "revision",
+        "repo_type",
+        "timeout",
+        "files_metadata",
+        "expand",
+        "token"
+      ]
+    },
+    {
+      "name": "request_space_hardware",
+      "signature": "(repo_id: 'str', hardware: 'SpaceHardware', *, token: 'Union[bool, str, None]' = None, sleep_time: 'Optional[int]' = None) -> 'SpaceRuntime'",
+      "doc": "Request new hardware for a Space.\n\nArgs:\n    repo_id (`str`):\n        ID of the repo to update. Example: `\"bigcode/in-the-stack\"`.\n    hardware (`str` or [`SpaceHardware`]):\n        Hardware on which ...",
+      "parameters": [
+        "repo_id",
+        "hardware",
+        "token",
+        "sleep_time"
+      ]
+    },
+    {
+      "name": "request_space_storage",
+      "signature": "(repo_id: 'str', storage: 'SpaceStorage', *, token: 'Union[bool, str, None]' = None) -> 'SpaceRuntime'",
+      "doc": "Request persistent storage for a Space.\n\nArgs:\n    repo_id (`str`):\n        ID of the Space to update. Example: `\"open-llm-leaderboard/open_llm_leaderboard\"`.\n    storage (`str` or [`SpaceStorage`]):\n...",
+      "parameters": [
+        "repo_id",
+        "storage",
+        "token"
+      ]
+    },
+    {
+      "name": "restart_space",
+      "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None, factory_reboot: 'bool' = False) -> 'SpaceRuntime'",
+      "doc": "Restart your Space.\n\nThis is the only way to programmatically restart a Space if you've put it on Pause (see [`pause_space`]). You\nmust be the owner of the Space to restart it. If you are using an upg...",
+      "parameters": [
+        "repo_id",
+        "token",
+        "factory_reboot"
+      ]
+    },
+    {
+      "name": "resume_inference_endpoint",
+      "signature": "(name: 'str', *, namespace: 'Optional[str]' = None, running_ok: 'bool' = True, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+      "doc": "Resume an Inference Endpoint.\n\nFor convenience, you can also resume an Inference Endpoint using [`InferenceEndpoint.resume`].\n\nArgs:\n    name (`str`):\n        The name of the Inference Endpoint to res...",
+      "parameters": [
+        "name",
+        "namespace",
+        "running_ok",
+        "token"
+      ]
+    },
+    {
+      "name": "revision_exists",
+      "signature": "(repo_id: 'str', revision: 'str', *, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'bool'",
+      "doc": "Checks if a specific revision exists on a repo on the Hugging Face Hub.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separated\n        by a `/`.\n    revisi...",
+      "parameters": [
+        "repo_id",
+        "revision",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "run_as_future",
+      "signature": "(fn: 'Callable[..., R]', *args, **kwargs) -> 'Future[R]'",
+      "doc": "Run a method in the background and return a Future instance.\n\nThe main goal is to run methods without blocking the main thread (e.g. to push data during a training).\nBackground jobs are queued to pres...",
+      "parameters": [
+        "fn",
+        "args",
+        "kwargs"
+      ]
+    },
+    {
+      "name": "run_job",
+      "signature": "(*, image: 'str', command: 'List[str]', env: 'Optional[Dict[str, Any]]' = None, secrets: 'Optional[Dict[str, Any]]' = None, flavor: 'Optional[SpaceHardware]' = None, timeout: 'Optional[Union[int, float, str]]' = None, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'JobInfo'",
+      "doc": "Run compute Jobs on Hugging Face infrastructure.\n\nArgs:\n    image (`str`):\n        The Docker image to use.\n        Examples: `\"ubuntu\"`, `\"python:3.12\"`, `\"pytorch/pytorch:2.6.0-cuda12.4-cudnn9-devel...",
+      "parameters": [
+        "image",
+        "command",
+        "env",
+        "secrets",
+        "flavor",
+        "timeout",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "run_uv_job",
+      "signature": "(script: 'str', *, script_args: 'Optional[List[str]]' = None, dependencies: 'Optional[List[str]]' = None, python: 'Optional[str]' = None, image: 'Optional[str]' = None, env: 'Optional[Dict[str, Any]]' = None, secrets: 'Optional[Dict[str, Any]]' = None, flavor: 'Optional[SpaceHardware]' = None, timeout: 'Optional[Union[int, float, str]]' = None, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None, _repo: 'Optional[str]' = None) -> 'JobInfo'",
+      "doc": "Run a UV script Job on Hugging Face infrastructure.\n\nArgs:\n    script (`str`):\n        Path or URL of the UV script.\n\n    script_args (`List[str]`, *optional*)\n        Arguments to pass to the script....",
+      "parameters": [
+        "script",
+        "script_args",
+        "dependencies",
+        "python",
+        "image",
+        "env",
+        "secrets",
+        "flavor",
+        "timeout",
+        "namespace",
+        "token",
+        "_repo"
+      ]
+    },
+    {
+      "name": "scale_to_zero_inference_endpoint",
+      "signature": "(name: 'str', *, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+      "doc": "Scale Inference Endpoint to zero.\n\nAn Inference Endpoint scaled to zero will not be charged. It will be resume on the next request to it, with a\ncold start delay. This is different than pausing the In...",
+      "parameters": [
+        "name",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "set_space_sleep_time",
+      "signature": "(repo_id: 'str', sleep_time: 'int', *, token: 'Union[bool, str, None]' = None) -> 'SpaceRuntime'",
+      "doc": "Set a custom sleep time for a Space running on upgraded hardware..\n\nYour Space will go to sleep after X seconds of inactivity. You are not billed when your Space is in \"sleep\"\nmode. If a new visitor l...",
+      "parameters": [
+        "repo_id",
+        "sleep_time",
+        "token"
+      ]
+    },
+    {
+      "name": "snapshot_download",
+      "signature": "(repo_id: 'str', *, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, cache_dir: 'Union[str, Path, None]' = None, local_dir: 'Union[str, Path, None]' = None, proxies: 'Optional[Dict]' = None, etag_timeout: 'float' = 10, force_download: 'bool' = False, token: 'Union[bool, str, None]' = None, local_files_only: 'bool' = False, allow_patterns: 'Optional[Union[List[str], str]]' = None, ignore_patterns: 'Optional[Union[List[str], str]]' = None, max_workers: 'int' = 8, tqdm_class: 'Optional[Type[base_tqdm]]' = None, local_dir_use_symlinks: \"Union[bool, Literal['auto']]\" = 'auto', resume_download: 'Optional[bool]' = None) -> 'str'",
+      "doc": "Download repo files.\n\nDownload a whole snapshot of a repo's files at the specified revision. This is useful when you want all files from\na repo, because you don't know which ones you will need a prior...",
+      "parameters": [
+        "repo_id",
+        "repo_type",
+        "revision",
+        "cache_dir",
+        "local_dir",
+        "proxies",
+        "etag_timeout",
+        "force_download",
+        "token",
+        "local_files_only",
+        "allow_patterns",
+        "ignore_patterns",
+        "max_workers",
+        "tqdm_class",
+        "local_dir_use_symlinks",
+        "resume_download"
+      ]
+    },
+    {
+      "name": "space_info",
+      "signature": "(repo_id: 'str', *, revision: 'Optional[str]' = None, timeout: 'Optional[float]' = None, files_metadata: 'bool' = False, expand: 'Optional[List[ExpandSpaceProperty_T]]' = None, token: 'Union[bool, str, None]' = None) -> 'SpaceInfo'",
+      "doc": "Get info on one specific Space on huggingface.co.\n\nSpace can be private if you pass an acceptable token.\n\nArgs:\n    repo_id (`str`):\n        A namespace (user or an organization) and a repo name separ...",
+      "parameters": [
+        "repo_id",
+        "revision",
+        "timeout",
+        "files_metadata",
+        "expand",
+        "token"
+      ]
+    },
+    {
+      "name": "super_squash_history",
+      "signature": "(repo_id: 'str', *, branch: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, repo_type: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None) -> 'None'",
+      "doc": "Squash commit history on a branch for a repo on the Hub.\n\nSquashing the repo history is useful when you know you'll make hundreds of commits and you don't want to\nclutter the history. Squashing commit...",
+      "parameters": [
+        "repo_id",
+        "branch",
+        "commit_message",
+        "repo_type",
+        "token"
+      ]
+    },
+    {
+      "name": "unlike",
+      "signature": "(repo_id: 'str', *, token: 'Union[bool, str, None]' = None, repo_type: 'Optional[str]' = None) -> 'None'",
+      "doc": "Unlike a given repo on the Hub (e.g. remove from favorite list).\n\nTo prevent spam usage, it is not possible to `like` a repository from a script.\n\nSee also [`list_liked_repos`].\n\nArgs:\n    repo_id (`s...",
+      "parameters": [
+        "repo_id",
+        "token",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "update_collection_item",
+      "signature": "(collection_slug: 'str', item_object_id: 'str', *, note: 'Optional[str]' = None, position: 'Optional[int]' = None, token: 'Union[bool, str, None]' = None) -> 'None'",
+      "doc": "Update an item in a collection.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection to update. Example: `\"TheBloke/recent-models-64f9a55bb3115b4f513ec026\"`.\n    item_object_id (`str`):\n...",
+      "parameters": [
+        "collection_slug",
+        "item_object_id",
+        "note",
+        "position",
+        "token"
+      ]
+    },
+    {
+      "name": "update_collection_metadata",
+      "signature": "(collection_slug: 'str', *, title: 'Optional[str]' = None, description: 'Optional[str]' = None, position: 'Optional[int]' = None, private: 'Optional[bool]' = None, theme: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'Collection'",
+      "doc": "Update metadata of a collection on the Hub.\n\nAll arguments are optional. Only provided metadata will be updated.\n\nArgs:\n    collection_slug (`str`):\n        Slug of the collection to update. Example: ...",
+      "parameters": [
+        "collection_slug",
+        "title",
+        "description",
+        "position",
+        "private",
+        "theme",
+        "token"
+      ]
+    },
+    {
+      "name": "update_inference_endpoint",
+      "signature": "(name: 'str', *, accelerator: 'Optional[str]' = None, instance_size: 'Optional[str]' = None, instance_type: 'Optional[str]' = None, min_replica: 'Optional[int]' = None, max_replica: 'Optional[int]' = None, scale_to_zero_timeout: 'Optional[int]' = None, repository: 'Optional[str]' = None, framework: 'Optional[str]' = None, revision: 'Optional[str]' = None, task: 'Optional[str]' = None, custom_image: 'Optional[Dict]' = None, env: 'Optional[Dict[str, str]]' = None, secrets: 'Optional[Dict[str, str]]' = None, domain: 'Optional[str]' = None, path: 'Optional[str]' = None, cache_http_responses: 'Optional[bool]' = None, tags: 'Optional[List[str]]' = None, namespace: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'InferenceEndpoint'",
+      "doc": "Update an Inference Endpoint.\n\nThis method allows the update of either the compute configuration, the deployed model, the route, or any combination.\nAll arguments are optional but at least one must be...",
+      "parameters": [
+        "name",
+        "accelerator",
+        "instance_size",
+        "instance_type",
+        "min_replica",
+        "max_replica",
+        "scale_to_zero_timeout",
+        "repository",
+        "framework",
+        "revision",
+        "task",
+        "custom_image",
+        "env",
+        "secrets",
+        "domain",
+        "path",
+        "cache_http_responses",
+        "tags",
+        "namespace",
+        "token"
+      ]
+    },
+    {
+      "name": "update_repo_settings",
+      "signature": "(repo_id: 'str', *, gated: \"Optional[Literal['auto', 'manual', False]]\" = None, private: 'Optional[bool]' = None, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, xet_enabled: 'Optional[bool]' = None) -> 'None'",
+      "doc": "Update the settings of a repository, including gated access and visibility.\n\nTo give more control over how repos are used, the Hub allows repo authors to enable\naccess requests for their repos, and al...",
+      "parameters": [
+        "repo_id",
+        "gated",
+        "private",
+        "token",
+        "repo_type",
+        "xet_enabled"
+      ]
+    },
+    {
+      "name": "update_repo_visibility",
+      "signature": "(repo_id: 'str', private: 'bool' = False, *, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None) -> 'Dict[str, bool]'",
+      "doc": "Update the visibility setting of a repository.\n\nDeprecated. Use `update_repo_settings` instead.\n\nArgs:\n    repo_id (`str`, *optional*):\n        A namespace (user or an organization) and a repo name se...",
+      "parameters": [
+        "repo_id",
+        "private",
+        "token",
+        "repo_type"
+      ]
+    },
+    {
+      "name": "update_webhook",
+      "signature": "(webhook_id: 'str', *, url: 'Optional[str]' = None, watched: 'Optional[List[Union[Dict, WebhookWatchedItem]]]' = None, domains: 'Optional[List[constants.WEBHOOK_DOMAIN_T]]' = None, secret: 'Optional[str]' = None, token: 'Union[bool, str, None]' = None) -> 'WebhookInfo'",
+      "doc": "Update an existing webhook.\n\nArgs:\n    webhook_id (`str`):\n        The unique identifier of the webhook to be updated.\n    url (`str`, optional):\n        The URL to which the payload will be sent.\n   ...",
+      "parameters": [
+        "webhook_id",
+        "url",
+        "watched",
+        "domains",
+        "secret",
+        "token"
+      ]
+    },
+    {
+      "name": "upload_file",
+      "signature": "(*, path_or_fileobj: 'Union[str, Path, bytes, BinaryIO]', path_in_repo: 'str', repo_id: 'str', token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, commit_description: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, parent_commit: 'Optional[str]' = None, run_as_future: 'bool' = False) -> 'Union[CommitInfo, Future[CommitInfo]]'",
+      "doc": "Upload a local file (up to 50 GB) to the given repo. The upload is done\nthrough a HTTP post request, and doesn't require git or git-lfs to be\ninstalled.\n\nArgs:\n    path_or_fileobj (`str`, `Path`, `byt...",
+      "parameters": [
+        "path_or_fileobj",
+        "path_in_repo",
+        "repo_id",
+        "token",
+        "repo_type",
+        "revision",
+        "commit_message",
+        "commit_description",
+        "create_pr",
+        "parent_commit",
+        "run_as_future"
+      ]
+    },
+    {
+      "name": "upload_folder",
+      "signature": "(*, repo_id: 'str', folder_path: 'Union[str, Path]', path_in_repo: 'Optional[str]' = None, commit_message: 'Optional[str]' = None, commit_description: 'Optional[str]' = None, token: 'Union[str, bool, None]' = None, repo_type: 'Optional[str]' = None, revision: 'Optional[str]' = None, create_pr: 'Optional[bool]' = None, parent_commit: 'Optional[str]' = None, allow_patterns: 'Optional[Union[List[str], str]]' = None, ignore_patterns: 'Optional[Union[List[str], str]]' = None, delete_patterns: 'Optional[Union[List[str], str]]' = None, run_as_future: 'bool' = False) -> 'Union[CommitInfo, Future[CommitInfo]]'",
+      "doc": "Upload a local folder to the given repo. The upload is done through a HTTP requests, and doesn't require git or\ngit-lfs to be installed.\n\nThe structure of the folder will be preserved. Files with the ...",
+      "parameters": [
+        "repo_id",
+        "folder_path",
+        "path_in_repo",
+        "commit_message",
+        "commit_description",
+        "token",
+        "repo_type",
+        "revision",
+        "create_pr",
+        "parent_commit",
+        "allow_patterns",
+        "ignore_patterns",
+        "delete_patterns",
+        "run_as_future"
+      ]
+    },
+    {
+      "name": "upload_large_folder",
+      "signature": "(repo_id: 'str', folder_path: 'Union[str, Path]', *, repo_type: 'str', revision: 'Optional[str]' = None, private: 'Optional[bool]' = None, allow_patterns: 'Optional[Union[List[str], str]]' = None, ignore_patterns: 'Optional[Union[List[str], str]]' = None, num_workers: 'Optional[int]' = None, print_report: 'bool' = True, print_report_every: 'int' = 60) -> 'None'",
+      "doc": "Upload a large folder to the Hub in the most resilient way possible.\n\nSeveral workers are started to upload files in an optimized way. Before being committed to a repo, files must be\nhashed and be pre...",
+      "parameters": [
+        "repo_id",
+        "folder_path",
+        "repo_type",
+        "revision",
+        "private",
+        "allow_patterns",
+        "ignore_patterns",
+        "num_workers",
+        "print_report",
+        "print_report_every"
+      ]
+    },
+    {
+      "name": "whoami",
+      "signature": "(token: 'Union[bool, str, None]' = None) -> 'Dict'",
+      "doc": "Call HF API to know \"whoami\".\n\nArgs:\n    token (Union[bool, str, None], optional):\n        A valid user access token (string). Defaults to the locally saved\n        token, which is the recommended met...",
+      "parameters": [
+        "token"
+      ]
+    }
+  ]
+}
